@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkykj85uqqcbk"]
+
+[ext_resource type="Script" path="res://scripts/marching_squares.gd" id="1_a4fo5"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8eurg"]
+frequency = 0.0828
+
+[node name="Chunk" type="StaticBody2D"]
+scale = Vector2(128, 128)
+script = ExtResource("1_a4fo5")
+size = 32
+tile_colors = Array[Color]([Color(0.819608, 0.698039, 0.411765, 1), Color(0.72549, 0.8, 0.360784, 1)])
+noise = SubResource("FastNoiseLite_8eurg")

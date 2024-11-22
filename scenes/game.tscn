@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://b74kg5jhnm2ir"]
+
+[ext_resource type="PackedScene" uid="uid://edtpd4bdsoyj" path="res://scenes/prefabs/entities/player.tscn" id="1_6e8vm"]
+[ext_resource type="AudioStream" uid="uid://67c2be10cdy0" path="res://audio/music/day.wav" id="2_dubdw"]
+[ext_resource type="PackedScene" uid="uid://bkykj85uqqcbk" path="res://scenes/prefabs/game/chunk.tscn" id="3_rfjr8"]
+[ext_resource type="Script" path="res://scripts/world_generation.gd" id="4_01vym"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_unbqr"]
+frequency = 0.0427
+
+[node name="Game" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_6e8vm")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(0.5, 0.5)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_dubdw")
+autoplay = true
+
+[node name="Chunk" parent="." instance=ExtResource("3_rfjr8")]
+
+[node name="Node2D" type="Node2D" parent="Chunk"]
+script = ExtResource("4_01vym")
+noise = SubResource("FastNoiseLite_unbqr")

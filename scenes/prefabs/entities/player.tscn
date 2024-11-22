@@ -1,0 +1,109 @@
+[gd_scene load_steps=9 format=3 uid="uid://edtpd4bdsoyj"]
+
+[ext_resource type="Texture2D" uid="uid://bg2uv6edv0t53" path="res://graphics/images/player_ground.png" id="1_sfhjk"]
+[ext_resource type="Script" path="res://scenes/prefabs/entities/character_controller.gd" id="1_txgnq"]
+[ext_resource type="Script" path="res://scripts/player_controller.gd" id="3_aoalx"]
+
+[sub_resource type="Animation" id="Animation_qd8gl"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_rb8no"]
+resource_name = "Idle"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite/Player:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1.6245, 0.435275, 2.82843),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.125, 0.9), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_o4675"]
+resource_name = "Walk"
+length = 1.25
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite/Player:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -40), Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite/Player:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite/Player:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5, 0.733333, 1.23333, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 1.1), Vector2(1.1, 0.9), Vector2(0.9, 1.1), Vector2(1.1, 0.9), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7mfjm"]
+_data = {
+"RESET": SubResource("Animation_qd8gl"),
+"idle": SubResource("Animation_rb8no"),
+"walk": SubResource("Animation_o4675")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2xm3v"]
+radius = 20.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animator")]
+motion_mode = 1
+script = ExtResource("1_txgnq")
+speed = 700.0
+acceleration = 10.0
+animator = NodePath("Animation")
+animation_walk_speed_scale = 5.0
+animation_idle_speed_scale = 1.0
+
+[node name="Sprite" type="Node2D" parent="."]
+position = Vector2(0, -10.5998)
+scale = Vector2(0.948214, 1.05179)
+
+[node name="Player" type="Sprite2D" parent="Sprite"]
+texture = ExtResource("1_sfhjk")
+offset = Vector2(0, -16.8797)
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+root_node = NodePath(".")
+libraries = {
+"": SubResource("AnimationLibrary_7mfjm")
+}
+autoplay = "idle"
+playback_auto_capture_transition_type = 5
+playback_auto_capture_ease_type = 2
+playback_default_blend_time = 0.3
+
+[node name="Controller" type="Node2D" parent="."]
+script = ExtResource("3_aoalx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2xm3v")
