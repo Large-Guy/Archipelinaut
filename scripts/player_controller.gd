@@ -3,6 +3,7 @@ var character_controller: CharacterBody2D
 
 func _ready() -> void:
 	character_controller = get_parent()
+	Globals.player = get_parent()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

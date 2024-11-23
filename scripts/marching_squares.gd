@@ -303,10 +303,11 @@ func random(seed: int) -> float:
 	return (sin(cos(sin(float(seed) * 2491.234857893)*34570934.23457394)*3489579.217490) + 1)/2
 
 func _draw() -> void:
-	draw_line(Vector2(0,0),Vector2(size,0),Color.RED)
-	draw_line(Vector2(size,0),Vector2(size,size),Color.RED)
-	draw_line(Vector2(0,0),Vector2(0,size),Color.RED)
-	draw_line(Vector2(0,size),Vector2(size,size),Color.RED)
+	pass
+	#draw_line(Vector2(0,0),Vector2(size,0),Color.RED)
+	#draw_line(Vector2(size,0),Vector2(size,size),Color.RED)
+	#draw_line(Vector2(0,0),Vector2(0,size),Color.RED)
+	#draw_line(Vector2(0,size),Vector2(size,size),Color.RED)
 
 func order_edges():
 	# Final processing step, sort the points to go in a circle

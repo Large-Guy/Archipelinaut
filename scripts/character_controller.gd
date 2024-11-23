@@ -1,16 +1,32 @@
 extends CharacterBody2D
 
+@export_group("Configuration")
+
+@export var team: Globals.Team
+
+@export_group("Movement")
+
 @export var speed: float
 @export var acceleration: float
+
+@export_group("Animation")
+
 @export var animator: AnimationPlayer
 @export var animation_walk_speed_scale: float
 @export var animation_idle_speed_scale: float
 
 var _move_input: Vector2 = Vector2.ZERO
 
+var target: CharacterBody2D = null
+
+var last_move_dir: Vector2
+
 func move(m: Vector2):
 	_move_input = m
+	last_move_dir = m
 
+func _ready() -> void:
+	Globals.entities.append(self)
 
 func _physics_process(delta: float) -> void:
 	velocity = velocity.lerp(_move_input.normalized() * speed, acceleration * delta)
@@ -26,3 +42,11 @@ func _physics_process(delta: float) -> void:
 	_move_input = Vector2.ZERO
 	
 	move_and_slide()
+
+func _process(delta: float) -> void:
+	var sprite = get_node("Sprite")
+	if sprite != null:
+		if last_move_dir.x < 0:
+			sprite.scale.x = lerp(sprite.scale.x,-1.0,10 * delta)
+		elif last_move_dir.x > 0:
+			sprite.scale.x = lerp(sprite.scale.x,1.0,10 * delta)

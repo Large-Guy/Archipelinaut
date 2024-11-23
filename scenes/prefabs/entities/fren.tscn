@@ -1,15 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://edtpd4bdsoyj"]
+[gd_scene load_steps=9 format=3 uid="uid://cpgaggptfarj3"]
 
-[ext_resource type="Texture2D" uid="uid://bg2uv6edv0t53" path="res://graphics/images/player_ground.png" id="1_sfhjk"]
-[ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_txgnq"]
-[ext_resource type="Script" path="res://scripts/player_controller.gd" id="3_aoalx"]
+[ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_26p26"]
+[ext_resource type="Texture2D" uid="uid://bsnwm5hmfldms" path="res://graphics/images/fren.png" id="2_uvio5"]
+[ext_resource type="Script" path="res://scripts/fren_controller.gd" id="3_8vfvn"]
 
 [sub_resource type="Animation" id="Animation_qd8gl"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite/Player:rotation")
+tracks/0/path = NodePath("../Sprite/Scale/Player:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -21,7 +21,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite/Player:position")
+tracks/1/path = NodePath("../Sprite/Scale/Player:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -38,7 +38,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite/Player:scale")
+tracks/0/path = NodePath("../Sprite/Scale/Player:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -50,7 +50,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite/Player:rotation")
+tracks/1/path = NodePath("../Sprite/Scale/Player:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -62,7 +62,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Sprite/Player:position")
+tracks/2/path = NodePath("../Sprite/Scale/Player:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -79,7 +79,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite/Player:position")
+tracks/0/path = NodePath("../Sprite/Scale/Player:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = false
 tracks/0/keys = {
@@ -91,7 +91,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite/Player:rotation")
+tracks/1/path = NodePath("../Sprite/Scale/Player:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -103,7 +103,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Sprite/Player:scale")
+tracks/2/path = NodePath("../Sprite/Scale/Player:scale")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -123,22 +123,24 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_2xm3v"]
 radius = 20.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animator")]
+[node name="Fren" type="CharacterBody2D" node_paths=PackedStringArray("animator")]
 motion_mode = 1
-script = ExtResource("1_txgnq")
-team = 1
-speed = 700.0
+script = ExtResource("1_26p26")
+speed = 600.0
 acceleration = 10.0
 animator = NodePath("Animation")
-animation_walk_speed_scale = 5.0
+animation_walk_speed_scale = 3.0
 animation_idle_speed_scale = 1.0
 
 [node name="Sprite" type="Node2D" parent="."]
-position = Vector2(0, -10.5998)
 
-[node name="Player" type="Sprite2D" parent="Sprite"]
+[node name="Scale" type="Node2D" parent="Sprite"]
+position = Vector2(0, -10.5998)
+scale = Vector2(0.666, 0.666)
+
+[node name="Player" type="Sprite2D" parent="Sprite/Scale"]
 rotation = 0.349066
-texture = ExtResource("1_sfhjk")
+texture = ExtResource("2_uvio5")
 offset = Vector2(0, -30)
 
 [node name="Animation" type="AnimationPlayer" parent="."]
@@ -152,7 +154,8 @@ playback_auto_capture_ease_type = 2
 playback_default_blend_time = 0.3
 
 [node name="Controller" type="Node2D" parent="."]
-script = ExtResource("3_aoalx")
+script = ExtResource("3_8vfvn")
+follow_distance = 256.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2xm3v")

@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://edtpd4bdsoyj" path="res://scenes/prefabs/entities/player.tscn" id="1_6e8vm"]
 [ext_resource type="AudioStream" uid="uid://xhkyh1epyjtf" path="res://audio/ambience/ocean.wav" id="2_381ys"]
-[ext_resource type="PackedScene" uid="uid://bkykj85uqqcbk" path="res://scenes/prefabs/game/chunk.tscn" id="3_rfjr8"]
-[ext_resource type="Script" path="res://scripts/world_generation.gd" id="4_01vym"]
-[ext_resource type="Resource" uid="uid://bd52rntyidl4e" path="res://world/biomes/default.tres" id="5_lodh1"]
+[ext_resource type="PackedScene" uid="uid://cdcs7htllsjfw" path="res://scenes/prefabs/game/ground.tscn" id="3_bk8e1"]
+[ext_resource type="Script" path="res://scripts/chunk_manager.gd" id="4_r18y8"]
+[ext_resource type="PackedScene" uid="uid://cpgaggptfarj3" path="res://scenes/prefabs/entities/fren.tscn" id="6_20smm"]
 
 [node name="Game" type="Node2D"]
 
@@ -17,11 +17,10 @@ zoom = Vector2(0.5, 0.5)
 stream = ExtResource("2_381ys")
 autoplay = true
 
-[node name="Chunk" parent="." instance=ExtResource("3_rfjr8")]
-scale = Vector2(64, 64)
+[node name="Player2" parent="." instance=ExtResource("6_20smm")]
+position = Vector2(253, -46)
 
-[node name="Node2D" type="Node2D" parent="Chunk" node_paths=PackedStringArray("water")]
-scale = Vector2(0.015625, 0.015625)
-script = ExtResource("4_01vym")
-biome = ExtResource("5_lodh1")
-water = NodePath("")
+[node name="Chunk Manager" type="Node2D" parent="."]
+script = ExtResource("4_r18y8")
+chunk_size = 16
+chunk = ExtResource("3_bk8e1")
