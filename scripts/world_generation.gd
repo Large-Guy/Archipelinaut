@@ -25,4 +25,7 @@ func generate():
 				var n = object.object.instantiate()
 				get_parent().add_child(n)
 				n.global_position = Vector2(x,y) * chunk.tile_size + chunk.global_position
+				n.global_position += Vector2(randf_range(-32,32),randf_range(-32,32))
+				if object.randomize_rotation:
+					n.rotation_degrees = randf_range(-360,360)
 	chunk.generate()

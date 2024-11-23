@@ -1,0 +1,30 @@
+[gd_scene load_steps=9 format=3 uid="uid://bruhiypuxpvwa"]
+
+[ext_resource type="Texture2D" uid="uid://dacnb58o0t4xp" path="res://graphics/images/flint.png" id="1_pf4sp"]
+[ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_ub8u0"]
+[ext_resource type="AudioStream" uid="uid://b8fhf8kepf0x8" path="res://audio/sfx/footsteps/Concrete-01.ogg" id="3_tx6bj"]
+[ext_resource type="AudioStream" uid="uid://b5er103wv8tos" path="res://audio/sfx/footsteps/Concrete-02.ogg" id="4_dxcn8"]
+[ext_resource type="AudioStream" uid="uid://cp73i8sqspb32" path="res://audio/sfx/footsteps/Concrete-03.ogg" id="5_tswc0"]
+[ext_resource type="AudioStream" uid="uid://cattrup2aabt" path="res://audio/sfx/footsteps/Concrete-04.ogg" id="6_vp6l2"]
+[ext_resource type="AudioStream" uid="uid://dt2i01uivsae8" path="res://audio/sfx/footsteps/Concrete-05.ogg" id="7_5ioe5"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kbkoi"]
+random_pitch = 1.2
+streams_count = 5
+stream_0/stream = ExtResource("3_tx6bj")
+stream_1/stream = ExtResource("4_dxcn8")
+stream_2/stream = ExtResource("5_tswc0")
+stream_3/stream = ExtResource("6_vp6l2")
+stream_4/stream = ExtResource("7_5ioe5")
+
+[node name="Flint" type="CharacterBody2D"]
+script = ExtResource("1_ub8u0")
+health = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_pf4sp")
+
+[node name="OnHit" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_kbkoi")
+
+[connection signal="on_damage_no_args" from="." to="OnHit" method="play"]

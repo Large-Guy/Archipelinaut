@@ -43,7 +43,7 @@ func sample_object(pos: Vector2) -> WorldObject:
 	random.seed = hash(pos * 100)
 	
 	for object in world_objects:
-		if alt > object.spawn_altitude:
+		if alt > object.spawn_altitude_min and alt < object.spawn_altitude_max:
 			if random.randf() < object.spawn_frequency:
 				return object
 		i += 1

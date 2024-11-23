@@ -7,5 +7,6 @@
 script = ExtResource("1_ikxlp")
 object_name = "Palm tree"
 spawn_frequency = 0.02
-spawn_altitude = 0.8
+spawn_altitude_min = 0.81
+spawn_altitude_max = 1.0
 object = ExtResource("1_fjrlk")

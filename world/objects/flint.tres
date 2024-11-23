@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WorldObject" load_steps=3 format=3 uid="uid://bqiu4hvppvj2h"]
+
+[ext_resource type="PackedScene" uid="uid://bruhiypuxpvwa" path="res://scenes/prefabs/worldgen/flint.tscn" id="1_4nng4"]
+[ext_resource type="Script" path="res://scripts/world_object.gd" id="2_i81ro"]
+
+[resource]
+script = ExtResource("2_i81ro")
+object_name = "Palm tree"
+spawn_frequency = 0.015
+spawn_altitude_min = 0.77
+spawn_altitude_max = 0.8
+object = ExtResource("1_4nng4")
+randomize_rotation = true
