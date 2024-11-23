@@ -1,0 +1,49 @@
+[gd_scene load_steps=12 format=3 uid="uid://c2i7c8kysg6hx"]
+
+[ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_jt62e"]
+[ext_resource type="AudioStream" uid="uid://g75mkamudvs6" path="res://audio/sfx/footsteps/Wood-01.ogg" id="2_cvske"]
+[ext_resource type="AudioStream" uid="uid://dsvlgwwg87tan" path="res://audio/sfx/footsteps/Wood-02.ogg" id="3_0nqm6"]
+[ext_resource type="AudioStream" uid="uid://c3nlck1xv5ha5" path="res://audio/sfx/footsteps/Wood-03.ogg" id="4_34jrt"]
+[ext_resource type="AudioStream" uid="uid://t8s13m0yxhqx" path="res://audio/sfx/footsteps/Wood-04.ogg" id="5_bqq5w"]
+[ext_resource type="AudioStream" uid="uid://cl1djtqgww1we" path="res://audio/sfx/footsteps/Wood-05.ogg" id="6_5axww"]
+[ext_resource type="Material" uid="uid://chldijeer2avy" path="res://graphics/materials/tree_trunk.tres" id="7_wuget"]
+[ext_resource type="Script" path="res://scripts/stem.gd" id="8_1fp1v"]
+[ext_resource type="PackedScene" uid="uid://gpvgf6mlv5om" path="res://scenes/prefabs/worldgen/palm_tree_leaf.tscn" id="9_cvbuw"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7ptwa"]
+random_pitch = 1.2
+streams_count = 5
+stream_0/stream = ExtResource("2_cvske")
+stream_1/stream = ExtResource("3_0nqm6")
+stream_2/stream = ExtResource("4_34jrt")
+stream_3/stream = ExtResource("5_bqq5w")
+stream_4/stream = ExtResource("6_5axww")
+
+[sub_resource type="Gradient" id="Gradient_dgcii"]
+colors = PackedColorArray(0.686848, 0.288982, 0.329663, 1, 0.787914, 0.512392, 0.341733, 1)
+
+[node name="Tree" type="CharacterBody2D"]
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_jt62e")
+health = 7
+
+[node name="OnHit" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_7ptwa")
+
+[node name="Trunk" type="Line2D" parent="."]
+material = ExtResource("7_wuget")
+width = 32.0
+gradient = SubResource("Gradient_dgcii")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("8_1fp1v")
+growth_direction = Vector2(0, -1)
+growth_direction_variation = 15.0
+gravity = Vector2(0, 90)
+leaf_count = 7
+leaf_count_variation = 2
+leaves = ExtResource("9_cvbuw")
+
+[connection signal="on_damage_no_args" from="." to="OnHit" method="play"]

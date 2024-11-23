@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldObject" load_steps=3 format=3 uid="uid://i6rrkojrccj4"]
+
+[ext_resource type="PackedScene" uid="uid://c2i7c8kysg6hx" path="res://scenes/prefabs/worldgen/tree.tscn" id="1_fjrlk"]
+[ext_resource type="Script" path="res://scripts/world_object.gd" id="1_ikxlp"]
+
+[resource]
+script = ExtResource("1_ikxlp")
+object_name = "Palm tree"
+spawn_frequency = 0.02
+spawn_altitude = 0.8
+object = ExtResource("1_fjrlk")

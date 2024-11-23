@@ -5,17 +5,16 @@
 [ext_resource type="Resource" uid="uid://bd52rntyidl4e" path="res://world/biomes/default.tres" id="3_wgo26"]
 
 [node name="Ground" type="StaticBody2D"]
-scale = Vector2(64, 64)
 script = ExtResource("1_gn8e5")
-size = 16
 
 [node name="World Gen" type="Node2D" parent="."]
-scale = Vector2(0.015625, 0.015625)
+z_index = 4096
+z_as_relative = false
 script = ExtResource("2_3gito")
 biome = ExtResource("3_wgo26")
 
 [node name="Water" type="ColorRect" parent="."]
 z_index = -4096
-offset_right = 32.0
-offset_bottom = 32.0
+offset_right = 2048.0
+offset_bottom = 2048.0
 color = Color(0.264204, 0.740298, 0.906145, 1)

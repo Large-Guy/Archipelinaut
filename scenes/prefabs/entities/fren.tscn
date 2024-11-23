@@ -1,8 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpgaggptfarj3"]
+[gd_scene load_steps=16 format=3 uid="uid://cpgaggptfarj3"]
 
 [ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_26p26"]
 [ext_resource type="Texture2D" uid="uid://bsnwm5hmfldms" path="res://graphics/images/fren.png" id="2_uvio5"]
 [ext_resource type="Script" path="res://scripts/fren_controller.gd" id="3_8vfvn"]
+[ext_resource type="AudioStream" uid="uid://3l8tbk30gpy0" path="res://audio/sfx/footsteps/grass-01.wav" id="4_lhc48"]
+[ext_resource type="AudioStream" uid="uid://crnfueg8vtqea" path="res://audio/sfx/footsteps/grass-02.wav" id="5_jpf1x"]
+[ext_resource type="AudioStream" uid="uid://443wd2nr76hi" path="res://audio/sfx/footsteps/grass-03.wav" id="6_axirp"]
+[ext_resource type="AudioStream" uid="uid://06277iygc8lr" path="res://audio/sfx/footsteps/grass-04.wav" id="7_idknw"]
+[ext_resource type="AudioStream" uid="uid://c1iqdp56s4s5t" path="res://audio/sfx/footsteps/grass-05.wav" id="8_fslit"]
+[ext_resource type="AudioStream" uid="uid://bjjhhcbba2vfv" path="res://audio/sfx/footsteps/grass-06.wav" id="9_jwgvd"]
 
 [sub_resource type="Animation" id="Animation_qd8gl"]
 length = 0.001
@@ -123,7 +129,17 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_2xm3v"]
 radius = 20.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_e4ecu"]
+streams_count = 6
+stream_0/stream = ExtResource("4_lhc48")
+stream_1/stream = ExtResource("5_jpf1x")
+stream_2/stream = ExtResource("6_axirp")
+stream_3/stream = ExtResource("7_idknw")
+stream_4/stream = ExtResource("8_fslit")
+stream_5/stream = ExtResource("9_jwgvd")
+
 [node name="Fren" type="CharacterBody2D" node_paths=PackedStringArray("animator")]
+y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_26p26")
 speed = 600.0
@@ -159,3 +175,8 @@ follow_distance = 256.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2xm3v")
+
+[node name="Footstep Sounds" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_e4ecu")
+
+[connection signal="footstep" from="." to="Footstep Sounds" method="play"]

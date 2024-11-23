@@ -1,6 +1,7 @@
 extends StaticBody2D
 
-@export var size: int
+@export var tile_size: float = 64
+@export var size: int = 16
 
 var tiles: PackedInt32Array
 
@@ -156,7 +157,7 @@ func generate_mesh(i: int) -> ArrayMesh:
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
 	for vertex in vertices:
-		st.add_vertex(Vector3(vertex.x,vertex.y,0.0))
+		st.add_vertex(Vector3(vertex.x,vertex.y,0.0) * tile_size)
 	
 	for index in indices:
 		st.add_index(index)
@@ -258,8 +259,24 @@ func vertex_half_edging(v: Vector2) -> bool:
 	if !vertices.has(v + Vector2(0,-0.5)): return true
 	return false
 
+func get_tile_world_position(pos: Vector2) -> Tile:
+	pos -= global_position
+	var p = Vector2i(pos)/tile_size
+	
+	var t = get_tile(p.x,p.y)
+	
+	if t == -1:
+		return null
+	
+	return Globals.tiles[t]
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	var rect = Rect2(global_position,Vector2(size,size) * tile_size)
+	
+	if rect.has_point(Globals.player.global_position):
+		Globals.current_chunk = self
+	
 	queue_redraw()
 
 # Function to group edges into shapes
@@ -304,10 +321,10 @@ func random(seed: int) -> float:
 
 func _draw() -> void:
 	pass
-	#draw_line(Vector2(0,0),Vector2(size,0),Color.RED)
-	#draw_line(Vector2(size,0),Vector2(size,size),Color.RED)
-	#draw_line(Vector2(0,0),Vector2(0,size),Color.RED)
-	#draw_line(Vector2(0,size),Vector2(size,size),Color.RED)
+	#draw_line(Vector2(0,0),Vector2(size * tile_size,0),Color.RED)
+	#draw_line(Vector2(size * tile_size,0),Vector2(size * tile_size,size * tile_size),Color.RED)
+	#draw_line(Vector2(0,0),Vector2(0,size * tile_size),Color.RED)
+	#draw_line(Vector2(0,size * tile_size),Vector2(size * tile_size,size * tile_size),Color.RED)
 
 func order_edges():
 	# Final processing step, sort the points to go in a circle

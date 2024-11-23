@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg51lafggelkt"]
+
+[ext_resource type="Material" uid="uid://b63jcj0b4fct8" path="res://graphics/materials/range_indicator.tres" id="1_emap2"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_xgbrc"]
+
+[node name="RangeIndicator" type="MeshInstance2D"]
+material = ExtResource("1_emap2")
+scale = Vector2(512, 512)
+mesh = SubResource("QuadMesh_xgbrc")

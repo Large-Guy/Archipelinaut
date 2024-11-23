@@ -17,7 +17,7 @@ zoom = Vector2(0.5, 0.5)
 stream = ExtResource("2_381ys")
 autoplay = true
 
-[node name="Player2" parent="." instance=ExtResource("6_20smm")]
+[node name="Fren" parent="." instance=ExtResource("6_20smm")]
 position = Vector2(253, -46)
 
 [node name="Chunk Manager" type="Node2D" parent="."]

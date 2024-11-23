@@ -22,6 +22,8 @@ var entities: Array[CharacterBody2D]
 
 var player: CharacterBody2D
 
+var current_chunk: StaticBody2D
+
 func _ready():
 	world_seed = randi()
 	

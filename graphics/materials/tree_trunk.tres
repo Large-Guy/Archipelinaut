@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://chldijeer2avy"]
+
+[ext_resource type="Shader" path="res://graphics/shaders/foliage.gdshader" id="1_4tsp7"]
+
+[resource]
+shader = ExtResource("1_4tsp7")
+shader_parameter/tree_height = -400.0
+shader_parameter/wind = Vector2(20, 0)
