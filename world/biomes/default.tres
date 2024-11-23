@@ -8,13 +8,13 @@
 [ext_resource type="Resource" uid="uid://i6rrkojrccj4" path="res://world/objects/palm_tree.tres" id="6_7jcxi"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_gew1v"]
-frequency = 0.028
+frequency = 0.014
 fractal_type = 0
 
 [resource]
 script = ExtResource("1_nkox5")
 amplitudes = Array[float]([1.0])
 noiseLayers = Array[FastNoiseLite]([SubResource("FastNoiseLite_gew1v")])
-tile_amplitudes_percentage = Array[float]([0.622, 0.758])
+tile_amplitudes_percentage = Array[float]([0.772, 0.863])
 tiles = Array[ExtResource("2_qyev4")]([ExtResource("3_4r2hd"), ExtResource("4_e46ux")])
 world_objects = Array[ExtResource("5_1llpx")]([ExtResource("6_7jcxi")])
