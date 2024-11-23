@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Biome" load_steps=6 format=3 uid="uid://bd52rntyidl4e"]
+
+[ext_resource type="Script" path="res://scripts/biome.gd" id="1_nkox5"]
+[ext_resource type="Script" path="res://scripts/tile.gd" id="2_qyev4"]
+[ext_resource type="Resource" uid="uid://53vfym03ceql" path="res://world/tiles/sand.tres" id="3_4r2hd"]
+[ext_resource type="Resource" uid="uid://btvekshuw87s8" path="res://world/tiles/grass.tres" id="4_e46ux"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gew1v"]
+frequency = 0.0701
+fractal_type = 0
+
+[resource]
+script = ExtResource("1_nkox5")
+amplitudes = Array[float]([1.0])
+noiseLayers = Array[FastNoiseLite]([SubResource("FastNoiseLite_gew1v")])
+tile_amplitudes_percentage = Array[float]([0.522, 0.808])
+tiles = Array[ExtResource("2_qyev4")]([ExtResource("3_4r2hd"), ExtResource("4_e46ux")])

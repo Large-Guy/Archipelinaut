@@ -1,8 +1,6 @@
 extends StaticBody2D
 
 @export var size: int
-@export var tile_colors: Array[Color]
-@export var noise: FastNoiseLite
 
 var tiles: PackedInt32Array
 
@@ -132,13 +130,13 @@ func generate():
 		
 		meshs[i].mesh = generate_mesh(key)
 		meshs[i].z_index = -4096 + 20
-		meshs[i].modulate = tile_colors[key]
+		meshs[i].modulate = Globals.tiles[key].color
 		i += 1
 	
 	vertices.clear()
 	indices.clear()
 	generate_mesh(-1)
-	generate_collision()
+	#generate_collision()
 
 func generate_mesh(i: int) -> ArrayMesh:
 	var c = 0

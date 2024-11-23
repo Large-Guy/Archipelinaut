@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Tile" load_steps=2 format=3 uid="uid://53vfym03ceql"]
+
+[ext_resource type="Script" path="res://scripts/tile.gd" id="1_y6b4r"]
+
+[resource]
+script = ExtResource("1_y6b4r")
+name = "sand"
+color = Color(0.988235, 0.921569, 0.713726, 1)

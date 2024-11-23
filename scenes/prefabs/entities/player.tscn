@@ -139,7 +139,7 @@ scale = Vector2(0.948214, 1.05179)
 [node name="Player" type="Sprite2D" parent="Sprite"]
 rotation = 0.349066
 texture = ExtResource("1_sfhjk")
-offset = Vector2(0, -16.8797)
+offset = Vector2(0, -30)
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 root_node = NodePath(".")
