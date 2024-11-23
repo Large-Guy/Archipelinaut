@@ -131,7 +131,7 @@ func generate():
 		indices.clear()
 		
 		meshs[i].mesh = generate_mesh(key)
-		meshs[i].z_index = -4096
+		meshs[i].z_index = -4096 + 20
 		meshs[i].modulate = tile_colors[key]
 		i += 1
 	
