@@ -32,6 +32,10 @@ window/stretch/aspect="expand"
 
 project/assembly_name="Archipelinaut"
 
+[gui]
+
+theme/custom="res://graphics/ui_themes/main.tres"
+
 [input]
 
 move_right={

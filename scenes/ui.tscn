@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://6a7hpl85oyqj"]
+[gd_scene load_steps=9 format=3 uid="uid://6a7hpl85oyqj"]
 
+[ext_resource type="Script" path="res://scripts/inventory_ui.gd" id="1_as28b"]
 [ext_resource type="Texture2D" uid="uid://cardqf5ors8ha" path="res://graphics/images/ui/slot.png" id="1_nwq8m"]
 [ext_resource type="Theme" uid="uid://yiivvkgaiam3" path="res://graphics/ui_themes/main.tres" id="2_l1mrl"]
+[ext_resource type="Texture2D" uid="uid://bakhi5heq40h5" path="res://graphics/images/ui/selector.png" id="2_ma6ik"]
 [ext_resource type="Texture2D" uid="uid://dacnb58o0t4xp" path="res://graphics/images/items/flint.png" id="3_cn5j3"]
 [ext_resource type="Script" path="res://scripts/item_slot.gd" id="3_kba6j"]
 [ext_resource type="Script" path="res://scripts/health_display.gd" id="5_2got1"]
+[ext_resource type="Script" path="res://scripts/notifications_ui.gd" id="8_ekvu6"]
 
 [node name="UILayer" type="CanvasLayer"]
 follow_viewport_enabled = true
@@ -19,17 +22,25 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CurrentHeld" type="Label" parent="UI"]
+[node name="Inventory" type="Control" parent="UI" node_paths=PackedStringArray("selector", "slots")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_as28b")
+selector = NodePath("Selector")
+slots = NodePath("Slots")
+
+[node name="CurrentHeld" type="Label" parent="UI/Inventory"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -200.0
-offset_top = -195.0
-offset_right = 200.0
-offset_bottom = -162.0
+offset_left = 320.0
+offset_top = 575.0
+offset_right = 720.0
+offset_bottom = 608.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("2_l1mrl")
@@ -37,29 +48,29 @@ theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Inventory" type="HFlowContainer" parent="UI"]
+[node name="Slots" type="HFlowContainer" parent="UI/Inventory"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -540.0
-offset_top = -128.0
-offset_right = 540.0
-offset_bottom = -32.0
+offset_left = -20.0
+offset_top = 642.0
+offset_right = 1060.0
+offset_bottom = 738.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 6
 alignment = 1
 
-[node name="Slot1" type="TextureRect" parent="UI/Inventory"]
+[node name="Slot1" type="TextureRect" parent="UI/Inventory/Slots"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 texture = ExtResource("1_nwq8m")
 script = ExtResource("3_kba6j")
 
-[node name="Texture" type="TextureRect" parent="UI/Inventory/Slot1"]
+[node name="Texture" type="TextureRect" parent="UI/Inventory/Slots/Slot1"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -74,7 +85,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_cn5j3")
 
-[node name="Count" type="Label" parent="UI/Inventory/Slot1"]
+[node name="Count" type="Label" parent="UI/Inventory/Slots/Slot1"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -93,14 +104,14 @@ text = "99"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Slot2" type="TextureRect" parent="UI/Inventory"]
+[node name="Slot2" type="TextureRect" parent="UI/Inventory/Slots"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 texture = ExtResource("1_nwq8m")
 script = ExtResource("3_kba6j")
 renders_slot = 1
 
-[node name="Texture" type="TextureRect" parent="UI/Inventory/Slot2"]
+[node name="Texture" type="TextureRect" parent="UI/Inventory/Slots/Slot2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -115,7 +126,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_cn5j3")
 
-[node name="Count" type="Label" parent="UI/Inventory/Slot2"]
+[node name="Count" type="Label" parent="UI/Inventory/Slots/Slot2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -134,14 +145,14 @@ text = "99"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Slot3" type="TextureRect" parent="UI/Inventory"]
+[node name="Slot3" type="TextureRect" parent="UI/Inventory/Slots"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 texture = ExtResource("1_nwq8m")
 script = ExtResource("3_kba6j")
 renders_slot = 2
 
-[node name="Texture" type="TextureRect" parent="UI/Inventory/Slot3"]
+[node name="Texture" type="TextureRect" parent="UI/Inventory/Slots/Slot3"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -156,7 +167,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_cn5j3")
 
-[node name="Count" type="Label" parent="UI/Inventory/Slot3"]
+[node name="Count" type="Label" parent="UI/Inventory/Slots/Slot3"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -175,14 +186,14 @@ text = "99"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Slot4" type="TextureRect" parent="UI/Inventory"]
+[node name="Slot4" type="TextureRect" parent="UI/Inventory/Slots"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 texture = ExtResource("1_nwq8m")
 script = ExtResource("3_kba6j")
 renders_slot = 3
 
-[node name="Texture" type="TextureRect" parent="UI/Inventory/Slot4"]
+[node name="Texture" type="TextureRect" parent="UI/Inventory/Slots/Slot4"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -197,7 +208,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_cn5j3")
 
-[node name="Count" type="Label" parent="UI/Inventory/Slot4"]
+[node name="Count" type="Label" parent="UI/Inventory/Slots/Slot4"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -216,14 +227,14 @@ text = "99"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Slot5" type="TextureRect" parent="UI/Inventory"]
+[node name="Slot5" type="TextureRect" parent="UI/Inventory/Slots"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 texture = ExtResource("1_nwq8m")
 script = ExtResource("3_kba6j")
 renders_slot = 4
 
-[node name="Texture" type="TextureRect" parent="UI/Inventory/Slot5"]
+[node name="Texture" type="TextureRect" parent="UI/Inventory/Slots/Slot5"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -238,7 +249,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_cn5j3")
 
-[node name="Count" type="Label" parent="UI/Inventory/Slot5"]
+[node name="Count" type="Label" parent="UI/Inventory/Slots/Slot5"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -257,8 +268,17 @@ text = "99"
 horizontal_alignment = 2
 vertical_alignment = 2
 
+[node name="Selector" type="TextureRect" parent="UI/Inventory"]
+z_index = 1
+layout_mode = 0
+offset_left = 292.0
+offset_top = 682.0
+offset_right = 398.0
+offset_bottom = 788.0
+pivot_offset = Vector2(53, 53)
+texture = ExtResource("2_ma6ik")
+
 [node name="Hearts" type="HFlowContainer" parent="UI"]
-modulate = Color(0.957351, 0.335498, 0.366978, 1)
 layout_mode = 0
 offset_top = 648.0
 offset_right = 1080.0
@@ -266,3 +286,24 @@ offset_bottom = 680.0
 alignment = 1
 script = ExtResource("5_2got1")
 player = true
+
+[node name="Notifications" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -720.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("8_ekvu6")
+
+[node name="Label" type="Label" parent="UI/Notifications"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 23.0
+theme = ExtResource("2_l1mrl")
+text = "Hello!"
+horizontal_alignment = 2

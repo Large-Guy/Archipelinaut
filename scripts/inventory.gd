@@ -1,5 +1,6 @@
 extends Node
 
+var current_selected: int = 0
 var stacks: Array[ItemStack]
 
 func _ready():
