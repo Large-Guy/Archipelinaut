@@ -56,6 +56,8 @@ y_sort_enabled = true
 scale = Vector2(1, 0.4)
 texture = ExtResource("10_sfm2j")
 
+[node name="loot" type="Node2D" parent="."]
+
 [connection signal="on_damage_no_args" from="." to="OnHit" method="play"]
 [connection signal="on_damage_no_args" from="." to="Trunk" method="_apply_random_force" binds= [50.0]]
 [connection signal="on_death_no_args" from="." to="." method="destroy_self"]

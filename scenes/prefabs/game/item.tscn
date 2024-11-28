@@ -1,0 +1,110 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3sy0sklml40p"]
+
+[ext_resource type="Script" path="res://scripts/item_object.gd" id="1_g400w"]
+[ext_resource type="Texture2D" uid="uid://0x4xika3bpb4" path="res://graphics/images/items/log.png" id="1_m6dxd"]
+[ext_resource type="Texture2D" uid="uid://dximly534w0r1" path="res://graphics/images/shadow.png" id="3_po14d"]
+
+[sub_resource type="Animation" id="Animation_dcbko"]
+resource_name = "ItemRotate"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1.2, 1.2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(-1, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1.2, 1, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -32), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Shadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.4, 0.2), Vector2(0.267, 0.134), Vector2(0.4, 0.2)]
+}
+
+[sub_resource type="Animation" id="Animation_1ly7g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Shadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.4, 0.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_712lx"]
+_data = {
+"ItemRotate": SubResource("Animation_dcbko"),
+"RESET": SubResource("Animation_1ly7g")
+}
+
+[node name="Item" type="Node2D"]
+script = ExtResource("1_g400w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite")
+libraries = {
+"": SubResource("AnimationLibrary_712lx")
+}
+autoplay = "ItemRotate"
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_m6dxd")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, 20)
+scale = Vector2(0.4, 0.2)
+texture = ExtResource("3_po14d")

@@ -69,13 +69,13 @@ func _apply_random_force(amplitude: float):
 	_apply_force(force)
 	for c in get_children():
 		if c is Line2D and "_apply_force" in c:
-			c._apply_force(-force)
+			c._apply_force(force)
 			#c._apply_random_force(amplitude)
 	
 func _apply_force(force: Vector2):
 	restore_velocity += force
 	for c in get_children():
-		if c is Line2D and "_apply_force" in c:
+		if "_apply_force" in c:
 			c._apply_force(force)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

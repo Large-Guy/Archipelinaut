@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bruhiypuxpvwa"]
+[gd_scene load_steps=15 format=3 uid="uid://bruhiypuxpvwa"]
 
 [ext_resource type="Texture2D" uid="uid://dacnb58o0t4xp" path="res://graphics/images/items/flint.png" id="1_pf4sp"]
 [ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_ub8u0"]
@@ -8,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://cattrup2aabt" path="res://audio/sfx/footsteps/Concrete-04.ogg" id="6_vp6l2"]
 [ext_resource type="AudioStream" uid="uid://dt2i01uivsae8" path="res://audio/sfx/footsteps/Concrete-05.ogg" id="7_5ioe5"]
 [ext_resource type="Script" path="res://scripts/animation_signal_utils.gd" id="8_uwssq"]
+[ext_resource type="Script" path="res://scripts/drops.gd" id="9_0rp5k"]
+[ext_resource type="Resource" uid="uid://bxd5q827iuha0" path="res://loot_tables/flint.tres" id="10_pxaha"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kbkoi"]
 random_pitch = 1.2
@@ -17,21 +19,6 @@ stream_1/stream = ExtResource("4_dxcn8")
 stream_2/stream = ExtResource("5_tswc0")
 stream_3/stream = ExtResource("6_vp6l2")
 stream_4/stream = ExtResource("7_5ioe5")
-
-[sub_resource type="Animation" id="Animation_4mj1y"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
 
 [sub_resource type="Animation" id="Animation_wg40q"]
 resource_name = "Hit"
@@ -49,6 +36,21 @@ tracks/0/keys = {
 "values": [0.698132, -0.349066, 0.174533, -0.0872665, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_4mj1y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s51g8"]
 _data = {
 "Hit": SubResource("Animation_wg40q"),
@@ -62,7 +64,6 @@ is_static = true
 health = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
 texture = ExtResource("1_pf4sp")
 
 [node name="OnHit" type="AudioStreamPlayer2D" parent="."]
@@ -75,5 +76,11 @@ libraries = {
 autoplay = "RESET"
 script = ExtResource("8_uwssq")
 
+[node name="drop" type="Node2D" parent="."]
+script = ExtResource("9_0rp5k")
+table = ExtResource("10_pxaha")
+
 [connection signal="on_damage_no_args" from="." to="OnHit" method="play"]
 [connection signal="on_damage_no_args" from="." to="AnimationPlayer" method="play_one_shot" binds= ["Hit"]]
+[connection signal="on_death_no_args" from="." to="." method="destroy_self"]
+[connection signal="on_death_no_args" from="." to="drop" method="drop"]

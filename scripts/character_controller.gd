@@ -63,7 +63,8 @@ func damage(from: CharacterBody2D, amount: int):
 	if(health > 0 or on_damage_on_death):
 		on_damage.emit(from,amount)
 		on_damage_no_args.emit()
-	elif (health <= 0):
+	
+	if (health <= 0):
 		on_death.emit(from, amount)
 		on_death_no_args.emit()
 
@@ -111,7 +112,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		move_and_slide()
 
-func destroy_self(time: float):
+func destroy_self(time: float = 0):
+	if time == 0:
+		queue_free()
+		return
+	
 	await get_tree().create_timer(time).timeout
 	queue_free()
 

@@ -24,6 +24,11 @@ Globals="*res://scripts/globals.gd"
 window/size/viewport_width=1080
 window/size/viewport_height=810
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[dotnet]
+
+project/assembly_name="Archipelinaut"
 
 [input]
 

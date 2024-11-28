@@ -15,8 +15,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var chunks_around_player: Array[Vector2i]
 	
-	for y in range(-2,2):
-		for x in range(-2,2):
+	for y in range(-3,2):
+		for x in range(-3,2):
 			var pos = Vector2i(x,y) + Vector2i(Globals.player.global_position / (chunk_scale * chunk_size))
 			chunks_around_player.append(pos)
 	

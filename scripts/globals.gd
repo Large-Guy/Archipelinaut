@@ -52,3 +52,6 @@ func get_entities_on_team(from: CharacterBody2D, teams: Array[Team], range: floa
 					viable.append(entity)
 	
 	return viable
+
+func get_current_scene_node():
+	return get_tree().current_scene
