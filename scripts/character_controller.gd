@@ -24,11 +24,19 @@ extends CharacterBody2D
 
 @export var on_damage_on_death: bool = true
 
+@export_group("Sounds")
+
+@export var footsteps: AudioStream
+@export var hurt: AudioStream
+@export var death: AudioStream
+
 signal on_damage
 signal on_damage_no_args
 
 signal on_death
 signal on_death_no_args
+
+var current_health: int = 0
 
 var _move_input: Vector2 = Vector2.ZERO
 
@@ -40,8 +48,6 @@ var last_move_dir: Vector2
 
 var footstep_pos: Vector2
 
-signal footstep
-
 func move(m: Vector2):
 	_move_input = m.normalized()
 	last_move_dir = m.normalized()
@@ -50,7 +56,7 @@ func add_force(f: Vector2):
 	force += f
 
 func damage(from: CharacterBody2D, amount: int):
-	if(health <= 0):
+	if(current_health <= 0):
 		return
 	
 	if amount > 1:
@@ -58,24 +64,27 @@ func damage(from: CharacterBody2D, amount: int):
 		if amount <= 0:
 			amount = 1
 	
-	health -= amount
+	current_health -= amount
 	
-	if(health > 0 or on_damage_on_death):
+	if(current_health > 0 or on_damage_on_death):
 		on_damage.emit(from,amount)
 		on_damage_no_args.emit()
+		Sounds.play(hurt)
 	
-	if (health <= 0):
+	if (current_health <= 0):
 		on_death.emit(from, amount)
 		on_death_no_args.emit()
+		Sounds.play(death)
 
 func _ready() -> void:
 	Globals.entities.append(self)
 	footstep_pos = global_position
+	current_health = health
 
 func _physics_process(delta: float) -> void:
 	if footstep_pos.distance_to(global_position) > 196:
 		footstep_pos = global_position
-		footstep.emit()
+		Sounds.play(footsteps)
 	
 	velocity = velocity.lerp(_move_input.normalized() * speed, acceleration * delta)
 	

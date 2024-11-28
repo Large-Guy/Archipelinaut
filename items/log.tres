@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bqtgcsrvehv0f"]
+
+[ext_resource type="Script" path="res://scripts/item.gd" id="1_ryf4q"]
+[ext_resource type="Texture2D" uid="uid://0x4xika3bpb4" path="res://graphics/images/items/log.png" id="2_khgcm"]
+
+[resource]
+script = ExtResource("1_ryf4q")
+item_name = "Log"
+sprite = ExtResource("2_khgcm")
+description = ""
+stack_size = 99

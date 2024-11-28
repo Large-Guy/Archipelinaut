@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://yiivvkgaiam3"]
+
+[ext_resource type="FontFile" uid="uid://biipsptg1w5y1" path="res://graphics/fonts/mini-wakuwaku/mini-wakuwaku-maru.otf" id="1_c0l8w"]
+
+[resource]
+default_font = ExtResource("1_c0l8w")

@@ -19,3 +19,11 @@ func physics():
 		velocity.x *= 0.98
 		velocity.y += 350*get_physics_process_delta_time()
 		await get_tree().physics_frame
+
+func _physics_process(delta):
+	if global_position.distance_to(Globals.player.global_position) < 128:
+		global_position = global_position.lerp(Globals.player.global_position,10*delta)
+	
+	if global_position.distance_to(Globals.player.global_position) < 48:
+		Inventory.add_item(item)
+		queue_free()

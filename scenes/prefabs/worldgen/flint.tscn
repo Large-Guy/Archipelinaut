@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bruhiypuxpvwa"]
+[gd_scene load_steps=16 format=3 uid="uid://bruhiypuxpvwa"]
 
 [ext_resource type="Texture2D" uid="uid://dacnb58o0t4xp" path="res://graphics/images/items/flint.png" id="1_pf4sp"]
 [ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_ub8u0"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/animation_signal_utils.gd" id="8_uwssq"]
 [ext_resource type="Script" path="res://scripts/drops.gd" id="9_0rp5k"]
 [ext_resource type="Resource" uid="uid://bxd5q827iuha0" path="res://loot_tables/flint.tres" id="10_pxaha"]
+[ext_resource type="Script" path="res://scripts/health_display.gd" id="11_60em7"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kbkoi"]
 random_pitch = 1.2
@@ -61,13 +62,11 @@ _data = {
 z_index = -10
 script = ExtResource("1_ub8u0")
 is_static = true
-health = 3
+health = 4
+hurt = SubResource("AudioStreamRandomizer_kbkoi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_pf4sp")
-
-[node name="OnHit" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamRandomizer_kbkoi")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -80,7 +79,17 @@ script = ExtResource("8_uwssq")
 script = ExtResource("9_0rp5k")
 table = ExtResource("10_pxaha")
 
-[connection signal="on_damage_no_args" from="." to="OnHit" method="play"]
+[node name="Hearts" type="HFlowContainer" parent="."]
+modulate = Color(0.957351, 0.335498, 0.366978, 1)
+top_level = true
+offset_left = -528.0
+offset_top = -67.0
+offset_right = 552.0
+offset_bottom = -35.0
+alignment = 1
+script = ExtResource("11_60em7")
+heart_size = 64
+
 [connection signal="on_damage_no_args" from="." to="AnimationPlayer" method="play_one_shot" binds= ["Hit"]]
 [connection signal="on_death_no_args" from="." to="." method="destroy_self"]
 [connection signal="on_death_no_args" from="." to="drop" method="drop"]

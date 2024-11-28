@@ -1,17 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://b74kg5jhnm2ir"]
+[gd_scene load_steps=8 format=3 uid="uid://b74kg5jhnm2ir"]
 
+[ext_resource type="Script" path="res://scripts/camera_controller.gd" id="1_1vxqh"]
 [ext_resource type="PackedScene" uid="uid://edtpd4bdsoyj" path="res://scenes/prefabs/entities/player.tscn" id="1_6e8vm"]
 [ext_resource type="AudioStream" uid="uid://xhkyh1epyjtf" path="res://audio/ambience/ocean.wav" id="2_381ys"]
 [ext_resource type="PackedScene" uid="uid://cdcs7htllsjfw" path="res://scenes/prefabs/game/ground.tscn" id="3_bk8e1"]
 [ext_resource type="Script" path="res://scripts/chunk_manager.gd" id="4_r18y8"]
 [ext_resource type="PackedScene" uid="uid://cpgaggptfarj3" path="res://scenes/prefabs/entities/fren.tscn" id="6_20smm"]
+[ext_resource type="PackedScene" uid="uid://6a7hpl85oyqj" path="res://scenes/ui.tscn" id="6_nj0nq"]
 
 [node name="Game" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_6e8vm")]
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
+script = ExtResource("1_1vxqh")
+
+[node name="UI" parent="Camera2D" instance=ExtResource("6_nj0nq")]
+follow_viewport_enabled = false
+
+[node name="Player" parent="." instance=ExtResource("1_6e8vm")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_381ys")

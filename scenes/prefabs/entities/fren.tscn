@@ -12,6 +12,16 @@
 [ext_resource type="AudioStream" uid="uid://bw6jf3e50bk40" path="res://audio/sfx/mobs/goose/quack.mp3" id="10_e7v4l"]
 [ext_resource type="Script" path="res://scripts/random_trigger.gd" id="11_eq42g"]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_oi6le"]
+random_pitch = 1.2
+streams_count = 6
+stream_0/stream = ExtResource("4_lhc48")
+stream_1/stream = ExtResource("5_jpf1x")
+stream_2/stream = ExtResource("6_axirp")
+stream_3/stream = ExtResource("7_idknw")
+stream_4/stream = ExtResource("8_fslit")
+stream_5/stream = ExtResource("9_jwgvd")
+
 [sub_resource type="Animation" id="Animation_qd8gl"]
 length = 0.001
 tracks/0/type = "value"
@@ -130,15 +140,6 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2xm3v"]
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_e4ecu"]
-streams_count = 6
-stream_0/stream = ExtResource("4_lhc48")
-stream_1/stream = ExtResource("5_jpf1x")
-stream_2/stream = ExtResource("6_axirp")
-stream_3/stream = ExtResource("7_idknw")
-stream_4/stream = ExtResource("8_fslit")
-stream_5/stream = ExtResource("9_jwgvd")
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ulg6r"]
 random_pitch = 1.6
 streams_count = 1
@@ -154,6 +155,7 @@ acceleration = 10.0
 animator = NodePath("Animation")
 animation_walk_speed_scale = 3.0
 animation_idle_speed_scale = 1.0
+footsteps = SubResource("AudioStreamRandomizer_oi6le")
 
 [node name="Sprite" type="Node2D" parent="."]
 
@@ -183,9 +185,6 @@ follow_distance = 256.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2xm3v")
 
-[node name="Footstep Sounds" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamRandomizer_e4ecu")
-
 [node name="Quack" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_ulg6r")
 
@@ -193,5 +192,4 @@ stream = SubResource("AudioStreamRandomizer_ulg6r")
 script = ExtResource("11_eq42g")
 frequency = 0.2
 
-[connection signal="footstep" from="." to="Footstep Sounds" method="play"]
 [connection signal="trigger" from="QuackTrigger" to="Quack" method="play"]
