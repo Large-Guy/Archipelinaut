@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bpjrqkfa2syqs"]
+
+[ext_resource type="Script" path="res://scripts/item.gd" id="1_wntms"]
+[ext_resource type="Texture2D" uid="uid://dacnb58o0t4xp" path="res://graphics/images/items/flint.png" id="2_vfrqo"]
+
+[resource]
+script = ExtResource("1_wntms")
+item_name = "Flint"
+sprite = ExtResource("2_vfrqo")
+description = ""

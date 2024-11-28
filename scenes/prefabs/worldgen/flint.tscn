@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bruhiypuxpvwa"]
+[gd_scene load_steps=13 format=3 uid="uid://bruhiypuxpvwa"]
 
-[ext_resource type="Texture2D" uid="uid://dacnb58o0t4xp" path="res://graphics/images/flint.png" id="1_pf4sp"]
+[ext_resource type="Texture2D" uid="uid://dacnb58o0t4xp" path="res://graphics/images/items/flint.png" id="1_pf4sp"]
 [ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_ub8u0"]
 [ext_resource type="AudioStream" uid="uid://b8fhf8kepf0x8" path="res://audio/sfx/footsteps/Concrete-01.ogg" id="3_tx6bj"]
 [ext_resource type="AudioStream" uid="uid://b5er103wv8tos" path="res://audio/sfx/footsteps/Concrete-02.ogg" id="4_dxcn8"]
 [ext_resource type="AudioStream" uid="uid://cp73i8sqspb32" path="res://audio/sfx/footsteps/Concrete-03.ogg" id="5_tswc0"]
 [ext_resource type="AudioStream" uid="uid://cattrup2aabt" path="res://audio/sfx/footsteps/Concrete-04.ogg" id="6_vp6l2"]
 [ext_resource type="AudioStream" uid="uid://dt2i01uivsae8" path="res://audio/sfx/footsteps/Concrete-05.ogg" id="7_5ioe5"]
+[ext_resource type="Script" path="res://scripts/animation_signal_utils.gd" id="8_uwssq"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kbkoi"]
 random_pitch = 1.2
@@ -17,14 +18,62 @@ stream_2/stream = ExtResource("5_tswc0")
 stream_3/stream = ExtResource("6_vp6l2")
 stream_4/stream = ExtResource("7_5ioe5")
 
+[sub_resource type="Animation" id="Animation_4mj1y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_wg40q"]
+resource_name = "Hit"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.866667, 1.46667),
+"transitions": PackedFloat32Array(0.133972, 0.329877, 0.615572, 0.435275, 1),
+"update": 0,
+"values": [0.698132, -0.349066, 0.174533, -0.0872665, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s51g8"]
+_data = {
+"Hit": SubResource("Animation_wg40q"),
+"RESET": SubResource("Animation_4mj1y")
+}
+
 [node name="Flint" type="CharacterBody2D"]
+z_index = -10
 script = ExtResource("1_ub8u0")
+is_static = true
 health = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
 texture = ExtResource("1_pf4sp")
 
 [node name="OnHit" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_kbkoi")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s51g8")
+}
+autoplay = "RESET"
+script = ExtResource("8_uwssq")
+
 [connection signal="on_damage_no_args" from="." to="OnHit" method="play"]
+[connection signal="on_damage_no_args" from="." to="AnimationPlayer" method="play_one_shot" binds= ["Hit"]]

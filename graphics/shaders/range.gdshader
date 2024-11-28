@@ -28,11 +28,11 @@ void fragment() {
 	if(distance(UV,vec2(0.5)) < radius)
 	{
 		COLOR = fill;
-		
+
 		int angle = int(floor((atan2(UV - vec2(0.5)) + TIME) * 7.0)) % 2;
-		
+
 		float size = 0.015;
-		
+
 		if(distance(UV,vec2(0.5)) > radius-size && angle == 0)
 		{
 			COLOR = outline;

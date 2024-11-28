@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dacnb58o0t4xp"
-path="res://.godot/imported/flint.png-baada1402018b06f8ffbad24ced05ad0.ctex"
+path="res://.godot/imported/flint.png-85e813d3fa3157cf7f4a01f379527be7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/images/flint.png"
-dest_files=["res://.godot/imported/flint.png-baada1402018b06f8ffbad24ced05ad0.ctex"]
+source_file="res://graphics/images/items/flint.png"
+dest_files=["res://.godot/imported/flint.png-85e813d3fa3157cf7f4a01f379527be7.ctex"]
 
 [params]
 

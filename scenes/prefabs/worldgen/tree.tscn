@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2i7c8kysg6hx"]
+[gd_scene load_steps=13 format=3 uid="uid://c2i7c8kysg6hx"]
 
 [ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_jt62e"]
 [ext_resource type="AudioStream" uid="uid://g75mkamudvs6" path="res://audio/sfx/footsteps/Wood-01.ogg" id="2_cvske"]
@@ -6,9 +6,9 @@
 [ext_resource type="AudioStream" uid="uid://c3nlck1xv5ha5" path="res://audio/sfx/footsteps/Wood-03.ogg" id="4_34jrt"]
 [ext_resource type="AudioStream" uid="uid://t8s13m0yxhqx" path="res://audio/sfx/footsteps/Wood-04.ogg" id="5_bqq5w"]
 [ext_resource type="AudioStream" uid="uid://cl1djtqgww1we" path="res://audio/sfx/footsteps/Wood-05.ogg" id="6_5axww"]
-[ext_resource type="Material" uid="uid://chldijeer2avy" path="res://graphics/materials/tree_trunk.tres" id="7_wuget"]
 [ext_resource type="Script" path="res://scripts/stem.gd" id="8_1fp1v"]
 [ext_resource type="PackedScene" uid="uid://gpvgf6mlv5om" path="res://scenes/prefabs/worldgen/palm_tree_leaf.tscn" id="9_cvbuw"]
+[ext_resource type="Texture2D" uid="uid://dximly534w0r1" path="res://graphics/images/shadow.png" id="10_sfm2j"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7ptwa"]
 random_pitch = 1.2
@@ -22,17 +22,19 @@ stream_4/stream = ExtResource("6_5axww")
 [sub_resource type="Gradient" id="Gradient_dgcii"]
 colors = PackedColorArray(0.686848, 0.288982, 0.329663, 1, 0.787914, 0.512392, 0.341733, 1)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_g110r"]
+radius = 15.0
+
 [node name="Tree" type="CharacterBody2D"]
-z_as_relative = false
 y_sort_enabled = true
 script = ExtResource("1_jt62e")
+is_static = true
 health = 7
 
 [node name="OnHit" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_7ptwa")
 
 [node name="Trunk" type="Line2D" parent="."]
-material = ExtResource("7_wuget")
 width = 32.0
 gradient = SubResource("Gradient_dgcii")
 joint_mode = 2
@@ -42,8 +44,18 @@ script = ExtResource("8_1fp1v")
 growth_direction = Vector2(0, -1)
 growth_direction_variation = 15.0
 gravity = Vector2(0, 90)
-leaf_count = 7
-leaf_count_variation = 2
-leaves = ExtResource("9_cvbuw")
+leaf_count = 5
+leaf_count_variation = 1
+leaf = ExtResource("9_cvbuw")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_g110r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+scale = Vector2(1, 0.4)
+texture = ExtResource("10_sfm2j")
 
 [connection signal="on_damage_no_args" from="." to="OnHit" method="play"]
+[connection signal="on_damage_no_args" from="." to="Trunk" method="_apply_random_force" binds= [50.0]]
+[connection signal="on_death_no_args" from="." to="." method="destroy_self"]

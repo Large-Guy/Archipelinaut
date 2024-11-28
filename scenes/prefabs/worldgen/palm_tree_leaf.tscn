@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://gpvgf6mlv5om"]
+[gd_scene load_steps=4 format=3 uid="uid://gpvgf6mlv5om"]
 
-[ext_resource type="Material" uid="uid://chldijeer2avy" path="res://graphics/materials/tree_trunk.tres" id="1_l2rnd"]
 [ext_resource type="Script" path="res://scripts/stem.gd" id="1_vnxoc"]
 
 [sub_resource type="Curve" id="Curve_fr46h"]
@@ -11,7 +10,7 @@ point_count = 2
 colors = PackedColorArray(0.251, 0.627, 0.376, 1, 0.478431, 0.701961, 0.4, 1)
 
 [node name="Leaf" type="Line2D"]
-material = ExtResource("1_l2rnd")
+z_index = 1
 position = Vector2(438, 295)
 points = PackedVector2Array(0, 0, 100, 0, 200, 0)
 width = 32.0
@@ -20,8 +19,9 @@ gradient = SubResource("Gradient_f0u2i")
 begin_cap_mode = 2
 end_cap_mode = 2
 script = ExtResource("1_vnxoc")
-growth_direction = Vector2(1, 0)
-growth_direction_variation = 180.0
+growth_direction = Vector2(0, -1)
+growth_direction_variation = 20.0
 length = 150.0
-length_variation = 50.0
-gravity = Vector2(0, 80)
+length_variation = 33.0
+gravity = Vector2(0, 150)
+stiffness = 1.0

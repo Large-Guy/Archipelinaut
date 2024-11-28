@@ -6,13 +6,13 @@ uniform vec2 wind;
 
 void vertex() {
 	// Normalized vertex height (assuming the tree height is 1.0)
-	float heightFactor = VERTEX.y / tree_height; // If not normalized, divide by the tree height
+	float heightFactor = -VERTEX.y / tree_height; // If not normalized, divide by the tree height
 
 	// Apply a smooth easing function
 	float bendFactor = pow(heightFactor, 1.5); // Or try pow(heightFactor, 1.25)
 
 	// Modify the vertex position
-	VERTEX += (wind + vec2(sin(TIME * (wind.x * 0.05)) * 10.0,0)) * bendFactor;
+	VERTEX += (wind) * bendFactor;
 
 }
 

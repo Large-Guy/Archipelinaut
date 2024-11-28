@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_i81ro")
-object_name = "Palm tree"
+object_name = "Flint"
 spawn_frequency = 0.015
 spawn_altitude_min = 0.77
 spawn_altitude_max = 0.8

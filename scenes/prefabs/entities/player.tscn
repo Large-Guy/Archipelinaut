@@ -127,7 +127,6 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2xm3v"]
-radius = 20.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_877xn"]
 streams_count = 6
@@ -143,7 +142,8 @@ y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_txgnq")
 team = 1
-speed = 700.0
+soft_collision = true
+speed = 3500.0
 acceleration = 10.0
 animator = NodePath("Animation")
 animation_walk_speed_scale = 5.0

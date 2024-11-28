@@ -129,7 +129,6 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2xm3v"]
-radius = 20.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_e4ecu"]
 streams_count = 6
@@ -149,6 +148,7 @@ stream_0/stream = ExtResource("10_e7v4l")
 y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_26p26")
+soft_collision = true
 speed = 600.0
 acceleration = 10.0
 animator = NodePath("Animation")
