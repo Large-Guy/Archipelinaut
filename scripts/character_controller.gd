@@ -21,6 +21,9 @@ extends CharacterBody2D
 
 @export var health: int
 @export var defence: int
+@export var defence_blocks_all_damage: bool = false
+@export var required_attack_level: int = 0
+@export var required_attack_type: Item.ItemType
 
 @export var on_damage_on_death: bool = true
 
@@ -58,14 +61,33 @@ func look(dir: Vector2):
 func add_force(f: Vector2):
 	force += f
 
-func damage(from: CharacterBody2D, amount: int):
+func damage(from: CharacterBody2D, amount: int, item: Item = null):
 	if(current_health <= 0):
 		return
 	
-	if amount > 1:
+	if item != null:
+		if required_attack_type != Item.ItemType.None:
+			if required_attack_type != item.item_type:
+				amount = 0
+			else:
+				if required_attack_type == Item.ItemType.Tool:
+					if item.tool_level < required_attack_level:
+						amount = 0
+					else:
+						amount += item.tool_damage
+				elif required_attack_type == Item.ItemType.Weapon:
+					amount += item.attack_damage
+		else:
+			if amount == 0:
+				amount = 1
+	else:
+		if required_attack_type != Item.ItemType.None:
+			amount = 0
+	
+	if amount >= 1:
 		amount -= defence
 		if amount <= 0:
-			amount = 1
+			amount = 0 if defence_blocks_all_damage else 1
 	
 	current_health -= amount
 	
@@ -133,11 +155,6 @@ func destroy_self(time: float = 0):
 	queue_free()
 
 func _process(delta: float) -> void:
-	var mouse = get_global_mouse_position()
-	
-	if mouse.distance_to(global_position) < 64 and Input.is_action_just_pressed("hit"):
-		damage(null,1)
-	
 	if has_node("Sprite"):
 		var sprite = get_node("Sprite")
 		if last_move_dir.x < 0:

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://jxwq0x5cknh7"]
+
+[ext_resource type="Script" path="res://scripts/item.gd" id="1_77enh"]
+[ext_resource type="Texture2D" uid="uid://bmo75rqmsgb5k" path="res://graphics/images/items/stick.png" id="2_lf0ur"]
+
+[resource]
+script = ExtResource("1_77enh")
+item_name = "Stick"
+sprite = ExtResource("2_lf0ur")
+item_type = 0
+description = ""
+stack_size = 99
+attack_damage = 0
+tool_damage = 0
+tool_level = 0

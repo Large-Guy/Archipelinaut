@@ -7,4 +7,9 @@
 script = ExtResource("1_wntms")
 item_name = "Flint"
 sprite = ExtResource("2_vfrqo")
+item_type = 3
 description = ""
+stack_size = 99
+attack_damage = 0
+tool_damage = 1
+tool_level = 1

@@ -1,18 +1,26 @@
-[gd_scene load_steps=14 format=3 uid="uid://biswd6tbjbr0p"]
+[gd_scene load_steps=18 format=3 uid="uid://cuiphm34bio8e"]
 
-[ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_flvg4"]
-[ext_resource type="AudioStream" uid="uid://b1x34tpl36268" path="res://audio/sfx/hitsounds/player_hit.ogg" id="2_8nd81"]
-[ext_resource type="Resource" uid="uid://e1hbyky1jfip" path="res://loot_tables/rock.tres" id="6_gym43"]
-[ext_resource type="Texture2D" uid="uid://dxel84o45ospy" path="res://graphics/images/rock.png" id="7_vp0vr"]
-[ext_resource type="Script" path="res://scripts/animation_signal_utils.gd" id="8_eeqli"]
-[ext_resource type="Script" path="res://scripts/drops.gd" id="9_0rqj5"]
-[ext_resource type="Script" path="res://scripts/health_display.gd" id="11_mbl6q"]
-[ext_resource type="Texture2D" uid="uid://dximly534w0r1" path="res://graphics/images/shadow.png" id="12_vphvi"]
+[ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_upqyk"]
+[ext_resource type="AudioStream" uid="uid://3l8tbk30gpy0" path="res://audio/sfx/footsteps/grass-01.wav" id="2_btb1s"]
+[ext_resource type="AudioStream" uid="uid://crnfueg8vtqea" path="res://audio/sfx/footsteps/grass-02.wav" id="3_2nox5"]
+[ext_resource type="Texture2D" uid="uid://bhp66r80h7pxo" path="res://graphics/images/bush.png" id="3_riqrf"]
+[ext_resource type="AudioStream" uid="uid://443wd2nr76hi" path="res://audio/sfx/footsteps/grass-03.wav" id="4_7gt5i"]
+[ext_resource type="Script" path="res://scripts/animation_signal_utils.gd" id="4_oxn7t"]
+[ext_resource type="AudioStream" uid="uid://06277iygc8lr" path="res://audio/sfx/footsteps/grass-04.wav" id="5_gpfyk"]
+[ext_resource type="Script" path="res://scripts/drops.gd" id="5_tc0wc"]
+[ext_resource type="AudioStream" uid="uid://c1iqdp56s4s5t" path="res://audio/sfx/footsteps/grass-05.wav" id="6_c6ypt"]
+[ext_resource type="Resource" uid="uid://firg3pwfxn85" path="res://loot_tables/bush.tres" id="6_ww5rm"]
+[ext_resource type="Script" path="res://scripts/health_display.gd" id="7_fb4q6"]
+[ext_resource type="Texture2D" uid="uid://dximly534w0r1" path="res://graphics/images/shadow.png" id="8_64kng"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_n5r78"]
 random_pitch = 1.2
-streams_count = 1
-stream_0/stream = ExtResource("2_8nd81")
+streams_count = 5
+stream_0/stream = ExtResource("2_btb1s")
+stream_1/stream = ExtResource("3_2nox5")
+stream_2/stream = ExtResource("4_7gt5i")
+stream_3/stream = ExtResource("5_gpfyk")
+stream_4/stream = ExtResource("6_c6ypt")
 
 [sub_resource type="Animation" id="Animation_wg40q"]
 resource_name = "Hit"
@@ -55,29 +63,27 @@ _data = {
 radius = 41.0
 height = 194.0
 
-[node name="Rock" type="CharacterBody2D"]
+[node name="Bush" type="CharacterBody2D"]
 z_index = -10
-script = ExtResource("1_flvg4")
+script = ExtResource("1_upqyk")
 is_static = true
-health = 24
-required_attack_level = 2
-required_attack_type = 3
+health = 9
 hurt = SubResource("AudioStreamRandomizer_n5r78")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(0, -35)
-texture = ExtResource("7_vp0vr")
+texture = ExtResource("3_riqrf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_s51g8")
 }
 autoplay = "RESET"
-script = ExtResource("8_eeqli")
+script = ExtResource("4_oxn7t")
 
 [node name="drop" type="Node2D" parent="."]
-script = ExtResource("9_0rqj5")
-table = ExtResource("6_gym43")
+script = ExtResource("5_tc0wc")
+table = ExtResource("6_ww5rm")
 
 [node name="Hearts" type="HFlowContainer" parent="."]
 top_level = true
@@ -86,14 +92,14 @@ offset_top = -67.0
 offset_right = 552.0
 offset_bottom = -35.0
 alignment = 1
-script = ExtResource("11_mbl6q")
+script = ExtResource("7_fb4q6")
 heart_size = 64
 
 [node name="Shadows" type="Sprite2D" parent="."]
 z_index = -1
 y_sort_enabled = true
 scale = Vector2(1.5, 0.6)
-texture = ExtResource("12_vphvi")
+texture = ExtResource("8_64kng")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.57079

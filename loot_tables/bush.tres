@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=5 format=3 uid="uid://firg3pwfxn85"]
+
+[ext_resource type="Script" path="res://scripts/loot.gd" id="1_1mn76"]
+[ext_resource type="Resource" uid="uid://jxwq0x5cknh7" path="res://items/stick.tres" id="2_i461r"]
+[ext_resource type="Script" path="res://scripts/loot_table.gd" id="3_qq186"]
+
+[sub_resource type="Resource" id="Resource_tfpsx"]
+script = ExtResource("1_1mn76")
+item = ExtResource("2_i461r")
+min_count = 2
+max_count = 4
+
+[resource]
+script = ExtResource("3_qq186")
+items = Array[ExtResource("1_1mn76")]([SubResource("Resource_tfpsx")])

@@ -145,6 +145,34 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2xm3v"]
 
+[sub_resource type="Animation" id="Animation_lbaxh"]
+resource_name = "Hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Holding:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 2.21914),
+"update": 0,
+"values": [Vector2(20, -44.4002), Vector2(97, -8.40019), Vector2(34, -8.4002), Vector2(44, -30)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Holding:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 2.21914),
+"update": 0,
+"values": [-0.71733, 1.43641, 0.958186, 0.0]
+}
+
 [sub_resource type="Animation" id="Animation_v4wtj"]
 resource_name = "Idle"
 loop_mode = 1
@@ -186,34 +214,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [-0.71733]
-}
-
-[sub_resource type="Animation" id="Animation_lbaxh"]
-resource_name = "Hit"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/Holding:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 2.21914),
-"update": 0,
-"values": [Vector2(20, -44.4002), Vector2(97, -8.40019), Vector2(34, -8.4002), Vector2(44, -30)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite/Holding:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 2.21914),
-"update": 0,
-"values": [-0.71733, 1.43641, 0.958186, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6n0aa"]

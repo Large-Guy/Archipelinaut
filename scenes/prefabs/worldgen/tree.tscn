@@ -35,6 +35,8 @@ y_sort_enabled = true
 script = ExtResource("1_jt62e")
 is_static = true
 health = 8
+required_attack_level = 1
+required_attack_type = 3
 hurt = SubResource("AudioStreamRandomizer_7ptwa")
 
 [node name="Trunk" type="Line2D" parent="."]

@@ -15,6 +15,10 @@ var inventory_open: bool = false
 
 func _ready():
 	item_slots.append_array(slots.get_children())
+	
+	for slot in hidden_slots:
+		item_slots.append_array(slot.get_children())
+	
 	s = target_selector_size
 
 func _process(delta):

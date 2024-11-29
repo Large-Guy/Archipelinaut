@@ -36,3 +36,10 @@ func _process(delta: float) -> void:
 	var item_stack: ItemStack = Inventory.stacks[Inventory.current_selected]
 	
 	item.texture = item_stack.item.sprite if item_stack != null else null
+	
+	for entity in Globals.entities:
+		if entity != null and entity != character_controller and mouse.distance_to(entity.global_position) < 64 and Input.is_action_just_pressed("hit"):
+			if item_stack != null:
+				entity.damage(character_controller,0,item_stack.item)
+			else:
+				entity.damage(character_controller,1)
