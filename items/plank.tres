@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bc3dyflr4lc7h"]
+
+[ext_resource type="Script" path="res://scripts/item.gd" id="1_7cmqe"]
+[ext_resource type="Texture2D" uid="uid://sos4ehdot2q4" path="res://graphics/images/items/planks.png" id="2_siyo2"]
+
+[resource]
+script = ExtResource("1_7cmqe")
+item_name = "Planks"
+sprite = ExtResource("2_siyo2")
+description = ""
+stack_size = 99

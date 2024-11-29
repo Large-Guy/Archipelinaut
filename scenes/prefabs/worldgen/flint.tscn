@@ -62,7 +62,7 @@ _data = {
 z_index = -10
 script = ExtResource("1_ub8u0")
 is_static = true
-health = 4
+health = 1
 hurt = SubResource("AudioStreamRandomizer_kbkoi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -88,6 +88,7 @@ offset_bottom = -35.0
 alignment = 1
 script = ExtResource("11_60em7")
 heart_size = 64
+health_per_heart = 1
 
 [connection signal="on_damage_no_args" from="." to="AnimationPlayer" method="play_one_shot" binds= ["Hit"]]
 [connection signal="on_death_no_args" from="." to="." method="destroy_self"]

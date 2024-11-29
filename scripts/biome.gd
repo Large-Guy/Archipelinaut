@@ -32,7 +32,7 @@ func sample_height_normalized(pos: Vector2) -> float:
 	return height / max
 
 func seeded_random(pos: Vector2) -> float:
-	return (cos(sin(pos.x*439498.39457390)*2885.3984589)*cos(sin(pos.y*34535.348957)*34987.348975)+1.0)/2.0
+	return (cos(sin(pos.x*43329498.39457390)*2845385.3984589)*cos(sin(pos.y*34523435.348957)*342134987.348975)+1.0)/2.0
 
 func sample_object(pos: Vector2) -> WorldObject:
 	var alt = sample_height_normalized(pos)

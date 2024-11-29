@@ -52,6 +52,9 @@ func move(m: Vector2):
 	_move_input = m.normalized()
 	last_move_dir = m.normalized()
 
+func look(dir: Vector2):
+	last_move_dir = dir.normalized()
+
 func add_force(f: Vector2):
 	force += f
 

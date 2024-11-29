@@ -20,7 +20,7 @@ func physics():
 		velocity.y += 600*get_physics_process_delta_time()
 		await get_tree().physics_frame
 
-func _physics_process(delta):
+func _process(delta):
 	if global_position.distance_to(Globals.player.global_position) < 128:
 		global_position = global_position.lerp(Globals.player.global_position,10*delta)
 	

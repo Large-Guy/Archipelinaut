@@ -1,18 +1,37 @@
 extends Control
 
+@export var current_held_label: Label
 @export var selector: TextureRect
 @export var slots: HFlowContainer
 @export var target_selector_size: float = 106
 
+@export var hidden_slots: Array[HFlowContainer]
+
 var item_slots: Array[TextureRect]
 
 var s: float = 0
+
+var inventory_open: bool = false
 
 func _ready():
 	item_slots.append_array(slots.get_children())
 	s = target_selector_size
 
 func _process(delta):
+	if Input.is_action_just_pressed("inventory"):
+		inventory_open = !inventory_open
+	
+	if inventory_open:
+		for i in hidden_slots.size():
+			var target_y: float = 560 - i * 100
+			hidden_slots[i].position.y = lerp(hidden_slots[i].position.y,target_y, 8*delta)
+	else:
+		for i in hidden_slots.size():
+			var target_y: float = 1000
+			hidden_slots[i].position.y = lerp(hidden_slots[i].position.y,target_y, 10*delta)
+	
+	current_held_label.text = Inventory.stacks[Inventory.current_selected].item.item_name if Inventory.stacks[Inventory.current_selected] != null else ""
+	
 	var offset = (selector.size.x - 96)/2
 	var target: Vector2 = item_slots[Inventory.current_selected].global_position - Vector2(offset,offset)
 	selector.global_position = selector.global_position.lerp(target,7*delta)

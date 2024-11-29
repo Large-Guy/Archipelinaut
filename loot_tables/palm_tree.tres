@@ -7,8 +7,8 @@
 [sub_resource type="Resource" id="Resource_hvemm"]
 script = ExtResource("1_ot71r")
 item = ExtResource("2_rreov")
-min_count = 1
-max_count = 3
+min_count = 2
+max_count = 7
 
 [resource]
 script = ExtResource("2_drsw7")

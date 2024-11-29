@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=9 format=3 uid="uid://btbfwn7hjddlx"]
+
+[ext_resource type="Script" path="res://scripts/item_stack.gd" id="1_sptuf"]
+[ext_resource type="Resource" uid="uid://hmwnu2qivllw" path="res://items/flint_hatchet.tres" id="2_bhncd"]
+[ext_resource type="Resource" uid="uid://bqtgcsrvehv0f" path="res://items/log.tres" id="3_h6jwl"]
+[ext_resource type="Resource" uid="uid://bpjrqkfa2syqs" path="res://items/flint.tres" id="4_6jacf"]
+[ext_resource type="Script" path="res://scripts/recipe.gd" id="4_a6thk"]
+
+[sub_resource type="Resource" id="Resource_exqsd"]
+script = ExtResource("1_sptuf")
+item = ExtResource("2_bhncd")
+count = 0
+
+[sub_resource type="Resource" id="Resource_eol5y"]
+script = ExtResource("1_sptuf")
+item = ExtResource("3_h6jwl")
+count = 1
+
+[sub_resource type="Resource" id="Resource_gu8hp"]
+script = ExtResource("1_sptuf")
+item = ExtResource("4_6jacf")
+count = 1
+
+[resource]
+script = ExtResource("4_a6thk")
+required = Array[ExtResource("1_sptuf")]([SubResource("Resource_eol5y"), SubResource("Resource_gu8hp")])
+outputs = Array[ExtResource("1_sptuf")]([SubResource("Resource_exqsd")])

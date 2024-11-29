@@ -23,5 +23,6 @@ growth_direction = Vector2(0, -1)
 growth_direction_variation = 20.0
 length = 150.0
 length_variation = 33.0
+segments = 8
 gravity = Vector2(0, 150)
 stiffness = 1.0

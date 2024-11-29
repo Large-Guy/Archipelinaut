@@ -18,3 +18,9 @@ func add_item(item: Item):
 			stacks[s].item = item
 			stacks[s].count += 1
 			return
+
+func get_item_count(item: Item):
+	var count: int = 0
+	for s in stacks.size():
+		if stacks[s].item == item:
+			count += stacks[s].count

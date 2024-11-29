@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dqj5e657pu25r"]
+
+[ext_resource type="Script" path="res://scripts/item.gd" id="1_d2udr"]
+[ext_resource type="Texture2D" uid="uid://uc4d3cjoknby" path="res://graphics/images/items/coconut.png" id="2_qlbwy"]
+
+[resource]
+script = ExtResource("1_d2udr")
+item_name = "Coconut"
+sprite = ExtResource("2_qlbwy")
+description = ""
+stack_size = 99

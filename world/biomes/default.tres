@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Biome" load_steps=9 format=3 uid="uid://bd52rntyidl4e"]
+[gd_resource type="Resource" script_class="Biome" load_steps=10 format=3 uid="uid://bd52rntyidl4e"]
 
 [ext_resource type="Script" path="res://scripts/biome.gd" id="1_nkox5"]
 [ext_resource type="Script" path="res://scripts/tile.gd" id="2_qyev4"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/world_object.gd" id="5_1llpx"]
 [ext_resource type="Resource" uid="uid://i6rrkojrccj4" path="res://world/objects/palm_tree.tres" id="6_7jcxi"]
 [ext_resource type="Resource" uid="uid://bqiu4hvppvj2h" path="res://world/objects/flint.tres" id="7_02ntx"]
+[ext_resource type="Resource" uid="uid://bp37woi2pnuy1" path="res://world/objects/rock.tres" id="8_k6omm"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_gew1v"]
 frequency = 0.014
@@ -18,4 +19,4 @@ amplitudes = Array[float]([1.0])
 noiseLayers = Array[FastNoiseLite]([SubResource("FastNoiseLite_gew1v")])
 tile_amplitudes_percentage = Array[float]([0.77, 0.81])
 tiles = Array[ExtResource("2_qyev4")]([ExtResource("3_4r2hd"), ExtResource("4_e46ux")])
-world_objects = Array[ExtResource("5_1llpx")]([ExtResource("6_7jcxi"), ExtResource("7_02ntx")])
+world_objects = Array[ExtResource("5_1llpx")]([ExtResource("6_7jcxi"), ExtResource("7_02ntx"), ExtResource("8_k6omm")])

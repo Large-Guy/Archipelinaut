@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WorldObject" load_steps=3 format=3 uid="uid://bp37woi2pnuy1"]
+
+[ext_resource type="PackedScene" uid="uid://biswd6tbjbr0p" path="res://scenes/prefabs/worldgen/rock.tscn" id="1_wo2fq"]
+[ext_resource type="Script" path="res://scripts/world_object.gd" id="2_p6jod"]
+
+[resource]
+script = ExtResource("2_p6jod")
+object_name = "Palm tree"
+spawn_frequency = 0.008
+spawn_altitude_min = 0.81
+spawn_altitude_max = 1.0
+object = ExtResource("1_wo2fq")
+randomize_rotation = false

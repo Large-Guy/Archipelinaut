@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=7 format=3 uid="uid://bdqg1uwudcqi1"]
+
+[ext_resource type="Script" path="res://scripts/item_stack.gd" id="1_cyub8"]
+[ext_resource type="Resource" uid="uid://7yew50y1xmax" path="res://items/fibers.tres" id="2_um6sy"]
+[ext_resource type="Resource" uid="uid://dqj5e657pu25r" path="res://items/coconut.tres" id="3_vif4h"]
+[ext_resource type="Script" path="res://scripts/recipe.gd" id="4_g7iiy"]
+
+[sub_resource type="Resource" id="Resource_exqsd"]
+script = ExtResource("1_cyub8")
+item = ExtResource("2_um6sy")
+count = 2
+
+[sub_resource type="Resource" id="Resource_eol5y"]
+script = ExtResource("1_cyub8")
+item = ExtResource("3_vif4h")
+count = 1
+
+[resource]
+script = ExtResource("4_g7iiy")
+required = Array[ExtResource("1_cyub8")]([SubResource("Resource_eol5y")])
+outputs = Array[ExtResource("1_cyub8")]([SubResource("Resource_exqsd")])

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://hmwnu2qivllw"]
+
+[ext_resource type="Script" path="res://scripts/item.gd" id="1_0p2qa"]
+[ext_resource type="Texture2D" uid="uid://dbqnxouk7bil2" path="res://graphics/images/items/flint_hatchet.png" id="2_nbk80"]
+
+[resource]
+script = ExtResource("1_0p2qa")
+item_name = "Flint"
+sprite = ExtResource("2_nbk80")
+description = ""
+stack_size = 1

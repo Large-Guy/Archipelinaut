@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dao5gnq5dwn1l"]
+
+[ext_resource type="Texture2D" uid="uid://uc4d3cjoknby" path="res://graphics/images/items/coconut.png" id="7_apjyn"]
+
+[node name="Flint" type="CharacterBody2D"]
+z_index = -10
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.698132
+texture = ExtResource("7_apjyn")

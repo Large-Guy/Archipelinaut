@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://edtpd4bdsoyj"]
+[gd_scene load_steps=23 format=3 uid="uid://edtpd4bdsoyj"]
 
 [ext_resource type="Texture2D" uid="uid://bg2uv6edv0t53" path="res://graphics/images/player_ground.png" id="1_sfhjk"]
 [ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_txgnq"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://b1x34tpl36268" path="res://audio/sfx/hitsounds/player_hit.ogg" id="8_jf0x1"]
 [ext_resource type="AudioStream" uid="uid://c1iqdp56s4s5t" path="res://audio/sfx/footsteps/grass-05.wav" id="8_w4kri"]
 [ext_resource type="AudioStream" uid="uid://bjjhhcbba2vfv" path="res://audio/sfx/footsteps/grass-06.wav" id="9_4be38"]
+[ext_resource type="Texture2D" uid="uid://dacnb58o0t4xp" path="res://graphics/images/items/flint.png" id="10_a7s14"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_877xn"]
 random_pitch = 1.2
@@ -38,7 +39,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.349066]
+"values": [0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -144,6 +145,84 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2xm3v"]
 
+[sub_resource type="Animation" id="Animation_v4wtj"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Holding:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(44, -30), Vector2(44, -20), Vector2(44, -30)]
+}
+
+[sub_resource type="Animation" id="Animation_3rm5f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Holding:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(44, -30)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Holding:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.71733]
+}
+
+[sub_resource type="Animation" id="Animation_lbaxh"]
+resource_name = "Hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Holding:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 2.21914),
+"update": 0,
+"values": [Vector2(20, -44.4002), Vector2(97, -8.40019), Vector2(34, -8.4002), Vector2(44, -30)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Holding:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 2.21914),
+"update": 0,
+"values": [-0.71733, 1.43641, 0.958186, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6n0aa"]
+_data = {
+"Hit": SubResource("Animation_lbaxh"),
+"Idle": SubResource("Animation_v4wtj"),
+"RESET": SubResource("Animation_3rm5f")
+}
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animator")]
 y_sort_enabled = true
 motion_mode = 1
@@ -163,9 +242,15 @@ hurt = SubResource("AudioStreamRandomizer_6qwnb")
 position = Vector2(0, -10.5998)
 
 [node name="Player" type="Sprite2D" parent="Sprite"]
-rotation = 0.349066
 texture = ExtResource("1_sfhjk")
 offset = Vector2(0, -30)
+
+[node name="Holding" type="Node2D" parent="Sprite"]
+position = Vector2(44, -30)
+rotation = -0.71733
+
+[node name="Item" type="Sprite2D" parent="Sprite/Holding"]
+texture = ExtResource("10_a7s14")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 root_node = NodePath(".")
@@ -177,8 +262,16 @@ playback_auto_capture_transition_type = 5
 playback_auto_capture_ease_type = 2
 playback_default_blend_time = 0.3
 
-[node name="Controller" type="Node2D" parent="."]
+[node name="Controller" type="Node2D" parent="." node_paths=PackedStringArray("weapon_animator", "item")]
 script = ExtResource("3_aoalx")
+weapon_animator = NodePath("../WeaponAnimator")
+item = NodePath("../Sprite/Holding/Item")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2xm3v")
+
+[node name="WeaponAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6n0aa")
+}
+autoplay = "Idle"

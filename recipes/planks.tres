@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=7 format=3 uid="uid://okm7878kywgn"]
+
+[ext_resource type="Script" path="res://scripts/item_stack.gd" id="1_hcpms"]
+[ext_resource type="Script" path="res://scripts/recipe.gd" id="2_8iygq"]
+[ext_resource type="Resource" uid="uid://bc3dyflr4lc7h" path="res://items/plank.tres" id="2_ealvp"]
+[ext_resource type="Resource" uid="uid://bqtgcsrvehv0f" path="res://items/log.tres" id="3_m4xbl"]
+
+[sub_resource type="Resource" id="Resource_exqsd"]
+script = ExtResource("1_hcpms")
+item = ExtResource("2_ealvp")
+count = 2
+
+[sub_resource type="Resource" id="Resource_eol5y"]
+script = ExtResource("1_hcpms")
+item = ExtResource("3_m4xbl")
+count = 1
+
+[resource]
+script = ExtResource("2_8iygq")
+required = Array[ExtResource("1_hcpms")]([SubResource("Resource_eol5y")])
+outputs = Array[ExtResource("1_hcpms")]([SubResource("Resource_exqsd")])

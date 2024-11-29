@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2i7c8kysg6hx"]
+[gd_scene load_steps=18 format=3 uid="uid://c2i7c8kysg6hx"]
 
 [ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_jt62e"]
 [ext_resource type="AudioStream" uid="uid://g75mkamudvs6" path="res://audio/sfx/footsteps/Wood-01.ogg" id="2_cvske"]
@@ -8,7 +8,9 @@
 [ext_resource type="AudioStream" uid="uid://cl1djtqgww1we" path="res://audio/sfx/footsteps/Wood-05.ogg" id="6_5axww"]
 [ext_resource type="Script" path="res://scripts/stem.gd" id="8_1fp1v"]
 [ext_resource type="PackedScene" uid="uid://gpvgf6mlv5om" path="res://scenes/prefabs/worldgen/palm_tree_leaf.tscn" id="9_cvbuw"]
+[ext_resource type="PackedScene" uid="uid://dao5gnq5dwn1l" path="res://scenes/prefabs/worldgen/coconut.tscn" id="9_t1l3r"]
 [ext_resource type="Script" path="res://scripts/drops.gd" id="10_d1gna"]
+[ext_resource type="Resource" uid="uid://dqj5e657pu25r" path="res://items/coconut.tres" id="10_mjwk4"]
 [ext_resource type="Texture2D" uid="uid://dximly534w0r1" path="res://graphics/images/shadow.png" id="10_sfm2j"]
 [ext_resource type="Resource" uid="uid://thx7mni6iiqe" path="res://loot_tables/palm_tree.tres" id="11_usdvm"]
 [ext_resource type="Script" path="res://scripts/health_display.gd" id="12_m85fm"]
@@ -44,15 +46,21 @@ end_cap_mode = 2
 script = ExtResource("8_1fp1v")
 growth_direction = Vector2(0, -1)
 growth_direction_variation = 15.0
+segments = 8
 gravity = Vector2(0, 90)
 leaf_count = 5
 leaf_count_variation = 1
 leaf = ExtResource("9_cvbuw")
+fruit_count = 2
+fruit_count_variation = 2
+fruit = ExtResource("9_t1l3r")
+fruit_item = ExtResource("10_mjwk4")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_g110r")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Shadows" type="Sprite2D" parent="."]
+z_index = -1
 y_sort_enabled = true
 scale = Vector2(1, 0.4)
 texture = ExtResource("10_sfm2j")
@@ -71,6 +79,7 @@ alignment = 1
 script = ExtResource("12_m85fm")
 heart_size = 64
 
+[connection signal="on_damage_no_args" from="." to="Trunk" method="_drop_fruit"]
 [connection signal="on_damage_no_args" from="." to="Trunk" method="_apply_random_force" binds= [50.0]]
-[connection signal="on_death_no_args" from="." to="." method="destroy_self"]
 [connection signal="on_death_no_args" from="." to="loot" method="drop"]
+[connection signal="on_death_no_args" from="." to="." method="destroy_self" binds= [3.0]]
