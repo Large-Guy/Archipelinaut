@@ -8,7 +8,7 @@ class_name Recipe
 
 func can_craft() -> bool:
 	for item in required:
-		if Inventory.count_item(item.item) < item.count:
+		if Globals.player.get_node("Inventory").count_item(item.item) < item.count:
 			return false
 	
 	return true
@@ -18,8 +18,8 @@ func craft():
 	
 	for item in required:
 		for i in item.count:
-			Inventory.remove_item(item.item)
+			Globals.player.get_node("Inventory").remove_item(item.item)
 	
 	for output in outputs:
 		for i in output.count:
-			Inventory.add_item(output.item)
+			Globals.player.get_node("Inventory").add_item(output.item)

@@ -25,6 +25,6 @@ func _process(delta):
 		global_position = global_position.lerp(Globals.player.global_position,10*delta)
 	
 	if global_position.distance_to(Globals.player.global_position) < 48:
-		Inventory.add_item(item)
+		Globals.player.get_node("Inventory").add_item(item)
 		Sounds.play_pitch_chain(preload("res://audio/sfx/miscellaneous/item.wav"),0.2)
 		queue_free()

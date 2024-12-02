@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Globals="*res://scripts/globals.gd"
-Inventory="*res://scripts/inventory.gd"
 Sounds="*res://scripts/sounds.gd"
 
 [display]

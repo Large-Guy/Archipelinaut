@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 	if mouse.x > global_position.x:
 		character_controller.look(Vector2(1,0))
 	
-	var item_stack: ItemStack = Inventory.stacks[Inventory.current_selected]
+	var item_stack: ItemStack = Globals.player.get_node("Inventory").stacks[Globals.player.get_node("Inventory").current_selected]
 	
 	item.texture = item_stack.item.sprite if item_stack != null else null
 	

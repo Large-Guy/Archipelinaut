@@ -30,3 +30,10 @@ position = Vector2(253, -46)
 script = ExtResource("4_r18y8")
 chunk_size = 16
 chunk = ExtResource("3_bk8e1")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(0.999999, 0.997917, 0.861446, 1)
+shadow_enabled = true
+
+[node name="Darken" type="DirectionalLight2D" parent="."]
+blend_mode = 1

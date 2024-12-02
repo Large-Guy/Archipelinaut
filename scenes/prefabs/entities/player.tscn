@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://edtpd4bdsoyj"]
+[gd_scene load_steps=24 format=3 uid="uid://edtpd4bdsoyj"]
 
 [ext_resource type="Texture2D" uid="uid://bg2uv6edv0t53" path="res://graphics/images/player_ground.png" id="1_sfhjk"]
 [ext_resource type="Script" path="res://scripts/character_controller.gd" id="1_txgnq"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://c1iqdp56s4s5t" path="res://audio/sfx/footsteps/grass-05.wav" id="8_w4kri"]
 [ext_resource type="AudioStream" uid="uid://bjjhhcbba2vfv" path="res://audio/sfx/footsteps/grass-06.wav" id="9_4be38"]
 [ext_resource type="Texture2D" uid="uid://dacnb58o0t4xp" path="res://graphics/images/items/flint.png" id="10_a7s14"]
+[ext_resource type="Script" path="res://scripts/inventory.gd" id="12_yfp5o"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_877xn"]
 random_pitch = 1.2
@@ -275,3 +276,7 @@ libraries = {
 "": SubResource("AnimationLibrary_6n0aa")
 }
 autoplay = "Idle"
+
+[node name="Inventory" type="Node2D" parent="."]
+script = ExtResource("12_yfp5o")
+slot_count = 5

@@ -1,4 +1,6 @@
-extends Node
+extends Node2D
+
+@export var slot_count: int = 20
 
 var current_selected: int = 0
 var stacks: Array[ItemStack]
@@ -7,7 +9,7 @@ var slots: Array[TextureRect]
 var grabbed_slot: TextureRect
 
 func _ready():
-	stacks.resize(20) # 5x4 first 5 are hotbar
+	stacks.resize(slot_count)
 
 func add_item(item: Item):
 	for s in stacks.size():
