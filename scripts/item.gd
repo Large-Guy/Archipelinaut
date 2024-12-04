@@ -18,6 +18,10 @@ enum ItemType {None,Food,Weapon,Tool}
 @export var tool_damage: int
 @export var tool_level: int
 
+@export_group("Tile")
+
+@export var tile: Tile
+
 static func spawn(item: Item, world_position: Vector2):
 	var item_object: PackedScene = preload("res://scenes/prefabs/game/item.tscn")
 	var n = item_object.instantiate()

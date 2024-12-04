@@ -4,14 +4,14 @@
 [ext_resource type="Theme" uid="uid://yiivvkgaiam3" path="res://graphics/ui_themes/main.tres" id="2_l1mrl"]
 [ext_resource type="Texture2D" uid="uid://bakhi5heq40h5" path="res://graphics/images/ui/selector.png" id="2_ma6ik"]
 [ext_resource type="Script" path="res://scripts/health_display.gd" id="5_2got1"]
-[ext_resource type="Script" path="res://scenes/inventory_slot_grid.gd" id="5_bivkf"]
+[ext_resource type="Script" path="res://scripts/inventory_slot_grid.gd" id="5_bivkf"]
 [ext_resource type="Script" path="res://scripts/crafting.gd" id="7_2mp2c"]
 [ext_resource type="Script" path="res://scripts/notifications_ui.gd" id="8_ekvu6"]
 
 [node name="UILayer" type="CanvasLayer"]
 follow_viewport_enabled = true
 
-[node name="Inventory" type="Control" parent="." node_paths=PackedStringArray("current_held_label", "selector", "hidden_slots")]
+[node name="Inventory" type="Control" parent="." node_paths=PackedStringArray("current_held_label", "selector")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1080.0
@@ -19,7 +19,6 @@ offset_bottom = 810.0
 script = ExtResource("1_as28b")
 current_held_label = NodePath("CurrentHeld")
 selector = NodePath("Selector")
-hidden_slots = [null, null, null]
 
 [node name="CurrentHeld" type="Label" parent="Inventory"]
 layout_mode = 1
@@ -35,7 +34,10 @@ offset_bottom = -166.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("2_l1mrl")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.5)
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 32
+text = "Hello"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -71,8 +73,6 @@ grow_vertical = 0
 alignment = 1
 script = ExtResource("5_bivkf")
 slot_grid_size = Vector2i(5, 1)
-use_player_inventory = null
-display_slot_start_index = null
 
 [node name="Hearts" type="HFlowContainer" parent="."]
 offset_top = 648.0

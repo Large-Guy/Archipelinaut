@@ -1,11 +1,17 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bqtgcsrvehv0f"]
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://bqtgcsrvehv0f"]
 
 [ext_resource type="Script" path="res://scripts/item.gd" id="1_ryf4q"]
 [ext_resource type="Texture2D" uid="uid://0x4xika3bpb4" path="res://graphics/images/items/log.png" id="2_khgcm"]
+[ext_resource type="Resource" uid="uid://dlk061e5gfo31" path="res://world/tiles/wood.tres" id="3_66yo0"]
 
 [resource]
 script = ExtResource("1_ryf4q")
 item_name = "Log"
 sprite = ExtResource("2_khgcm")
+item_type = 0
 description = ""
 stack_size = 99
+attack_damage = 0
+tool_damage = 0
+tool_level = 0
+tile = ExtResource("3_66yo0")

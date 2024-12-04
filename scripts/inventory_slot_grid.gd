@@ -9,11 +9,11 @@ var last_size: Vector2i
 
 func _ready():
 	if use_player_inventory:
-		attached_inventory = Globals.player.get_node("Inventory")
+		attached_inventory = Globals.player.inventory
 
 func _process(delta):
 	if attached_inventory == null:
-		attached_inventory = Globals.player.get_node("Inventory")
+		attached_inventory = Globals.player.inventory
 		return
 	
 	size = Vector2(slot_grid_size) * 100

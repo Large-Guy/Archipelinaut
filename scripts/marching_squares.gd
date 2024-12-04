@@ -46,7 +46,7 @@ func _ready() -> void:
 func _clear():
 	for y in range(size+1):
 		for x in range(size+1):
-			set_tile(x,y,-1)
+			set_tile(Vector2i(x,y),-1)
 
 func insert_case(pos: Vector2,c: Array[bool]):
 	var case: Array = cases[c]
@@ -79,7 +79,9 @@ func tile_edging(x:int,y:int) -> bool:
 	if !tile_filled(x,y+1): return true
 	return false
 
-func set_tile(x:int,y:int,t:int) -> void:
+func set_tile(pos: Vector2i,t:int) -> void:
+	var x = pos.x
+	var y = pos.y
 	if(x < 0):
 		return
 	if(x >= size+1):
@@ -91,7 +93,9 @@ func set_tile(x:int,y:int,t:int) -> void:
 	
 	tiles[y * (size+1) + x] = t
 
-func get_tile(x:int,y:int) -> int:
+func get_tile(pos: Vector2i) -> int:
+	var x = pos.x
+	var y = pos.y
 	if(x < 0):
 		return 0
 	if(x >= size+1):
@@ -259,25 +263,11 @@ func vertex_half_edging(v: Vector2) -> bool:
 	if !vertices.has(v + Vector2(0,-0.5)): return true
 	return false
 
-func get_tile_world_position(pos: Vector2) -> Tile:
+func world_to_tile(pos: Vector2) -> Vector2i:
 	pos -= global_position
 	var p = Vector2i(pos)/tile_size
 	
-	var t = get_tile(p.x,p.y)
-	
-	if t == -1:
-		return null
-	
-	return Globals.tiles[t]
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	var rect = Rect2(global_position,Vector2(size,size) * tile_size)
-	
-	if rect.has_point(Globals.player.global_position):
-		Globals.current_chunk = self
-	
-	queue_redraw()
+	return p
 
 # Function to group edges into shapes
 func group_edges_into_shapes() -> Array:

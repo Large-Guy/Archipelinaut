@@ -33,6 +33,10 @@ extends CharacterBody2D
 @export var hurt: AudioStream
 @export var death: AudioStream
 
+@export_group("Extensions")
+
+@export var inventory: Node2D
+
 signal on_damage
 signal on_damage_no_args
 

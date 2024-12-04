@@ -31,6 +31,7 @@ colors = PackedColorArray(0.686848, 0.288982, 0.329663, 1, 0.787914, 0.512392, 0
 radius = 15.0
 
 [node name="Tree" type="CharacterBody2D"]
+z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_jt62e")
 is_static = true

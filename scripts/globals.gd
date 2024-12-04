@@ -22,7 +22,11 @@ var entities: Array[CharacterBody2D]
 
 var player: CharacterBody2D
 
-var current_chunk: StaticBody2D
+var current_chunk: Node2D
+
+var mouse_hover_chunk: Node2D
+
+var current_selected_slot: TextureRect
 
 func _ready():
 	world_seed = randi()

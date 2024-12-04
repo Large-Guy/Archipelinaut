@@ -18,6 +18,6 @@ fractal_type = 0
 script = ExtResource("1_nkox5")
 amplitudes = Array[float]([1.0])
 noiseLayers = Array[FastNoiseLite]([SubResource("FastNoiseLite_gew1v")])
-tile_amplitudes_percentage = Array[float]([0.77, 0.81])
+tile_amplitudes_percentage = Array[float]([0.73, 0.81])
 tiles = Array[ExtResource("2_qyev4")]([ExtResource("3_4r2hd"), ExtResource("4_e46ux")])
 world_objects = Array[ExtResource("5_1llpx")]([ExtResource("6_7jcxi"), ExtResource("7_02ntx"), ExtResource("8_k6omm"), ExtResource("9_uxkl6")])
