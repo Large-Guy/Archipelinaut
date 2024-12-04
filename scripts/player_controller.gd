@@ -38,12 +38,20 @@ func attack() -> void:
 				entity.damage(character_controller,0,item_stack.item)
 			else:
 				entity.damage(character_controller,1)
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+
+func movement(delta):
 	var move = Input.get_vector("move_left","move_right","move_up","move_down")
 	character_controller.move(move)
 	
+	var mouse: Vector2 = get_global_mouse_position()
+	
+	if mouse.x < global_position.x:
+		character_controller.look(Vector2(-1,0))
+	
+	if mouse.x > global_position.x:
+		character_controller.look(Vector2(1,0))
+
+func interaction(delta):
 	interact_time += delta
 	
 	var item_stack: ItemStack = Globals.player.inventory.stacks[Globals.player.inventory.current_selected]
@@ -68,14 +76,14 @@ func _process(delta: float) -> void:
 		play_swing()
 		hover_chunk.walls.set_tile(hover_chunk.walls.world_to_tile(get_global_mouse_position()), Globals.tilesIDs[item_stack.item.tile])
 		hover_chunk.walls.generate()
-	
-	
-	var mouse: Vector2 = get_global_mouse_position()
-	
-	if mouse.x < global_position.x:
-		character_controller.look(Vector2(-1,0))
-	
-	if mouse.x > global_position.x:
-		character_controller.look(Vector2(1,0))
-	
+
+func hand(delta):
+	var item_stack: ItemStack = Globals.player.inventory.stacks[Globals.player.inventory.current_selected]
 	item.texture = item_stack.item.sprite if item_stack != null else null
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	
+	movement(delta)
+	interaction(delta)
+	hand(delta)
