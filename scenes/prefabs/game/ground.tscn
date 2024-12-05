@@ -1,29 +1,65 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdcs7htllsjfw"]
+[gd_scene load_steps=10 format=3 uid="uid://cdcs7htllsjfw"]
 
 [ext_resource type="Script" path="res://scripts/marching_squares.gd" id="1_gn8e5"]
 [ext_resource type="Script" path="res://scripts/chunk.gd" id="1_qwmpt"]
+[ext_resource type="Shader" path="res://graphics/shaders/water.gdshader" id="2_0n00m"]
 [ext_resource type="Script" path="res://scripts/world_generation.gd" id="2_3gito"]
 [ext_resource type="Resource" uid="uid://bd52rntyidl4e" path="res://world/biomes/default.tres" id="3_wgo26"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x8gwa"]
+width = 1024
+height = 1024
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7rn4i"]
+frequency = 0.0033
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_up7wk"]
+width = 1024
+height = 1024
+seamless = true
+noise = SubResource("FastNoiseLite_7rn4i")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sv6w1"]
+shader = ExtResource("2_0n00m")
+shader_parameter/position = null
+shader_parameter/size = null
+shader_parameter/waves_sin_size = 0.015
+shader_parameter/waves_amplitude = 0.01
+shader_parameter/gradient_sample_size = 0.05
+shader_parameter/color_shallow = Color(0.262745, 0.741176, 0.905882, 1)
+shader_parameter/color_deep = Color(0.372546, 0.550449, 0.855924, 1)
+shader_parameter/water_depth = 0.76
+shader_parameter/depth_noise_intensity = 0.1
+shader_parameter/region_start = Vector2(0.075, 0.075)
+shader_parameter/region_end = Vector2(0.925, 0.925)
+shader_parameter/foam = 0.005
+shader_parameter/foam_color = Color(0.759121, 0.923987, 0.992796, 1)
+shader_parameter/foam_noise_pan_speed = Vector2(0.05, 0.05)
+shader_parameter/depth_noise = SubResource("NoiseTexture2D_x8gwa")
+shader_parameter/foam_noise = SubResource("NoiseTexture2D_up7wk")
 
 [node name="Chunk" type="Node2D" node_paths=PackedStringArray("ground", "walls")]
 script = ExtResource("1_qwmpt")
 ground = NodePath("GroundLayer")
 walls = NodePath("Walls")
 
-[node name="Water" type="ColorRect" parent="."]
-z_index = -4096
-offset_right = 1024.0
-offset_bottom = 1024.0
-color = Color(0.264204, 0.740298, 0.906145, 1)
-
 [node name="GroundLayer" type="StaticBody2D" parent="."]
-z_index = -4096
+z_index = -4095
 script = ExtResource("1_gn8e5")
 
-[node name="World Gen" type="Node2D" parent="GroundLayer"]
+[node name="World Gen" type="Node2D" parent="GroundLayer" node_paths=PackedStringArray("water")]
 z_as_relative = false
 script = ExtResource("2_3gito")
 biome = ExtResource("3_wgo26")
+water = NodePath("../../Water")
 
 [node name="Walls" type="StaticBody2D" parent="."]
 script = ExtResource("1_gn8e5")
+
+[node name="Water" type="ColorRect" parent="."]
+z_index = -4096
+material = SubResource("ShaderMaterial_sv6w1")
+offset_right = 1024.0
+offset_bottom = 1024.0

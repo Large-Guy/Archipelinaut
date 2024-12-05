@@ -7,7 +7,7 @@ void vertex() {
 }
 
 void fragment() {
-	
+
 }
 
 //void light() {
