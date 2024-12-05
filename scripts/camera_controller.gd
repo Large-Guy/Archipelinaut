@@ -1,5 +1,6 @@
 extends Camera2D
 
+@export_range(0,1) var mouse_influence: float = 0.1
 @export var lerp_speed: float = 10
 
 var target_override = null
@@ -12,4 +13,6 @@ func _process(delta):
 	if target_override != null:
 		target_position = target_override.position
 		target_override = null
-	global_position = global_position.lerp(target_position,lerp_speed * delta)
+
+	var mouse_local = get_local_mouse_position()
+	global_position = global_position.lerp(target_position + mouse_local * mouse_influence,lerp_speed * delta)
