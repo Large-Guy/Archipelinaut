@@ -12,21 +12,21 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var chunks_around_player: Array[Vector2i]
-	
+
 	for y in range(-3,3):
 		for x in range(-3,3):
 			var pos = Vector2i(x,y) + Vector2i(Globals.player.global_position / (chunk_scale * chunk_size))
 			chunks_around_player.append(pos)
-	
+
 	for chunk_ap in chunks_around_player:
 		if(!loaded_chunks.has(chunk_ap)):
 			var c = chunk.instantiate()
 			add_child(c)
 			c.global_position = Vector2(chunk_ap) * (chunk_scale * chunk_size)
 			loaded_chunks[chunk_ap] = c
-	
+
 	for chunk_l in loaded_chunks:
 		if(!chunks_around_player.has(chunk_l)):
 			loaded_chunks[chunk_l].queue_free()

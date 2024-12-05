@@ -11,10 +11,10 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if(target_player == null):
 		target_player = Globals.get_entities_on_team(character_controller,[Globals.Team.PLAYER]).pick_random()
 		return
-	
+
 	if(global_position.distance_to(target_player.global_position) > follow_distance):
 		character_controller.move(global_position.direction_to(target_player.global_position))

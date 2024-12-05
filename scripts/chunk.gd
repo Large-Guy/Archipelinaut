@@ -14,11 +14,11 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var rect = Rect2(global_position,Vector2(size,size) * tile_size)
-	
+
 	if rect.has_point(Globals.player.global_position):
 		Globals.current_chunk = self
-	
+
 	if rect.has_point(get_global_mouse_position()):
 		Globals.mouse_hover_chunk = self

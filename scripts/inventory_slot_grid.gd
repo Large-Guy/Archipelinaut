@@ -11,23 +11,23 @@ func _ready():
 	if use_player_inventory:
 		attached_inventory = Globals.player.inventory
 
-func _process(delta):
+func _process(_delta):
 	if attached_inventory == null:
 		attached_inventory = Globals.player.inventory
 		return
-	
+
 	size = Vector2(slot_grid_size) * 100
 	if last_size != slot_grid_size:
 		last_size = slot_grid_size
 		for s in get_children():
 			s.queue_free()
-		
+
 		var slot = load("res://scenes/item_slot.tscn")
-		
+
 		for i in slot_grid_size.x * slot_grid_size.y:
 			var s = slot.instantiate()
 			s.inventory = attached_inventory
 			s.renders_slot = i + display_slot_start_index
 			add_child(s)
-		
+
 		print("Added slots")

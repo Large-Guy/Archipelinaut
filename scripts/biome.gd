@@ -17,47 +17,44 @@ func sample_height(pos: Vector2) -> float:
 	var height: float = 0
 	for i in range(noiseLayers.size()):
 		height += (noiseLayers[i].get_noise_2dv(pos) + 1) / 2 * amplitudes[i]
-	
+
 	return height
 
 func sample_height_normalized(pos: Vector2) -> float:
 	var height: float = 0
-	var max: float = 0
-	
+	var m: float = 0
+
 	for i in range(noiseLayers.size()):
 		height += (noiseLayers[i].get_noise_2dv(pos) + 1) / 2 * amplitudes[i]
-		max += amplitudes[i]
-	
-	
-	return height / max
+		m += amplitudes[i]
+
+
+	return height / m
 
 func seeded_random(pos: Vector2) -> float:
 	return (cos(sin(pos.x*43329498.39457390)*2845385.3984589)*cos(sin(pos.y*34523435.348957)*342134987.348975)+1.0)/2.0
 
 func sample_object(pos: Vector2) -> WorldObject:
 	var alt = sample_height_normalized(pos)
-	
-	var i: int = 0
-	
+
 	var random = RandomNumberGenerator.new()
 	random.seed = hash(pos * 100)
-	
+
 	for object in world_objects:
 		if alt > object.spawn_altitude_min and alt < object.spawn_altitude_max:
 			if random.randf() < object.spawn_frequency:
 				return object
-		i += 1
 	return null
 
 func sample_tile(pos: Vector2) -> Tile:
 	var height: float = sample_height_normalized(pos)
-	
+
 	var current_tile: Tile = null
-	
+
 	for tile in range(tile_amplitudes_percentage.size()):
 		if(height > tile_amplitudes_percentage[tile]):
 			current_tile = tiles[tile]
 		else:
 			break
-	
+
 	return current_tile
