@@ -57,6 +57,7 @@ water = NodePath("../../Water")
 
 [node name="Walls" type="StaticBody2D" parent="."]
 script = ExtResource("1_gn8e5")
+use_collision = true
 
 [node name="Water" type="ColorRect" parent="."]
 z_index = -4096

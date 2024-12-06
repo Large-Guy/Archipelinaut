@@ -28,7 +28,6 @@ func sample_height_normalized(pos: Vector2) -> float:
 		height += (noiseLayers[i].get_noise_2dv(pos) + 1) / 2 * amplitudes[i]
 		m += amplitudes[i]
 
-
 	return height / m
 
 func seeded_random(pos: Vector2) -> float:

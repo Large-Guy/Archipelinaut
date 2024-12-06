@@ -27,5 +27,5 @@ static func spawn(item: Item, world_position: Vector2):
 	var n = item_object.instantiate()
 	n.item = item
 	n.global_position = world_position
-	
+
 	Globals.get_current_scene_node().add_child(n)

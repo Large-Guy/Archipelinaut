@@ -1,8 +1,23 @@
-[gd_resource type="Resource" script_class="Tile" load_steps=2 format=3 uid="uid://dlk061e5gfo31"]
+[gd_resource type="Resource" script_class="Tile" load_steps=8 format=3 uid="uid://dlk061e5gfo31"]
 
+[ext_resource type="AudioStream" uid="uid://g75mkamudvs6" path="res://audio/sfx/footsteps/Wood-01.ogg" id="1_i078p"]
 [ext_resource type="Script" path="res://scripts/tile.gd" id="1_jg0yd"]
+[ext_resource type="AudioStream" uid="uid://dsvlgwwg87tan" path="res://audio/sfx/footsteps/Wood-02.ogg" id="2_b0ea1"]
+[ext_resource type="AudioStream" uid="uid://c3nlck1xv5ha5" path="res://audio/sfx/footsteps/Wood-03.ogg" id="3_ejicl"]
+[ext_resource type="AudioStream" uid="uid://t8s13m0yxhqx" path="res://audio/sfx/footsteps/Wood-04.ogg" id="4_46xts"]
+[ext_resource type="AudioStream" uid="uid://cl1djtqgww1we" path="res://audio/sfx/footsteps/Wood-05.ogg" id="5_t18f3"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7ptwa"]
+random_pitch = 1.2
+streams_count = 5
+stream_0/stream = ExtResource("1_i078p")
+stream_1/stream = ExtResource("2_b0ea1")
+stream_2/stream = ExtResource("3_ejicl")
+stream_3/stream = ExtResource("4_46xts")
+stream_4/stream = ExtResource("5_t18f3")
 
 [resource]
 script = ExtResource("1_jg0yd")
 name = "wood"
 color = Color(0.872239, 0.435424, 0.336319, 1)
+place_sound = SubResource("AudioStreamRandomizer_7ptwa")

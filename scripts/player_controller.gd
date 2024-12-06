@@ -66,6 +66,10 @@ func build():
 	if current_hovering_tile == -1:
 		play_swing()
 		hover_chunk.walls.set_tile(hover_chunk.walls.world_to_tile(get_global_mouse_position()), Tile.tilesIDs[item_stack.item.tile])
+		Sounds.play(item_stack.item.tile.place_sound)
+		item_stack.count -= 1
+		if item_stack.count <= 0:
+			Globals.player.inventory.stacks[Globals.player.inventory.current_selected] = null
 		hover_chunk.walls.generate()
 
 func interaction(delta):

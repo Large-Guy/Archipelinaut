@@ -55,6 +55,13 @@ var last_move_dir: Vector2
 
 var footstep_pos: Vector2
 
+func _ready() -> void:
+	Globals.entities.append(self)
+	footstep_pos = global_position
+	current_health = health
+
+# Controls
+
 func move(m: Vector2):
 	_move_input = m.normalized()
 	last_move_dir = m.normalized()
@@ -68,55 +75,53 @@ func add_force(f: Vector2):
 func damage(from: CharacterBody2D, amount: int, item: Item = null):
 	if(current_health <= 0):
 		return
-	
-	if item != null:
-		if required_attack_type != Item.ItemType.None:
-			if required_attack_type != item.item_type:
-				amount = 0
-			else:
-				if required_attack_type == Item.ItemType.Tool:
-					if item.tool_level < required_attack_level:
-						amount = 0
-					else:
-						amount += item.tool_damage
-				elif required_attack_type == Item.ItemType.Weapon:
-					amount += item.attack_damage
-		else:
-			if amount == 0:
-				amount = 1
-	else:
+
+	if item == null:
 		if required_attack_type != Item.ItemType.None:
 			amount = 0
-	
+	else:
+		if required_attack_type == Item.ItemType.None:
+			if amount == 0:
+				amount = 1
+		elif required_attack_type != item.item_type:
+			amount = 0
+		elif required_attack_type == Item.ItemType.Tool:
+			amount = 0 if item.tool_level < required_attack_level else amount + item.tool_damage
+		elif required_attack_type == Item.ItemType.Weapon:
+			amount += item.attack_damage
+
 	if amount >= 1:
 		amount -= defence
 		if amount <= 0:
 			amount = 0 if defence_blocks_all_damage else 1
-	
+
+
 	current_health -= amount
-	
+
 	if(current_health > 0 or on_damage_on_death):
 		on_damage.emit(from,amount)
 		on_damage_no_args.emit()
 		Sounds.play(hurt)
-	
+
 	if (current_health <= 0):
 		on_death.emit(from, amount)
 		on_death_no_args.emit()
 		Sounds.play(death)
 
-func _ready() -> void:
-	Globals.entities.append(self)
-	footstep_pos = global_position
-	current_health = health
+func destroy_self(time: float = 0):
+	if time == 0:
+		queue_free()
+		return
 
-func _physics_process(delta: float) -> void:
+	await get_tree().create_timer(time).timeout
+	queue_free()
+
+
+func animation(delta):
 	if footstep_pos.distance_to(global_position) > 196:
 		footstep_pos = global_position
 		Sounds.play(footsteps)
-	
-	velocity = velocity.lerp(_move_input.normalized() * speed, acceleration * delta)
-	
+
 	if(animator != null):
 		if(velocity.length() > speed / 2):
 			animator.play("walk")
@@ -124,44 +129,41 @@ func _physics_process(delta: float) -> void:
 		else:
 			animator.play("idle")
 			animator.speed_scale = lerp(animator.speed_scale,animation_idle_speed_scale,10*delta)
-	
-	_move_input = Vector2.ZERO
-	
-	for entity in Globals.entities:
-		if entity != self and entity != null:
-			
-			var has_collider: bool = false
-			for child in entity.get_children():
-				if child is CollisionShape2D:
-					has_collider = true
-			
-			if entity.soft_collision:
-				has_collider = true
-			
-			if has_collider and entity.global_position.distance_to(global_position) < 64:
-				add_force(global_position.direction_to(entity.global_position) * -90)
-	
-	velocity += force
-	
-	force = Vector2.ZERO
-	
-	if is_static:
-		velocity = Vector2.ZERO
-	else:
-		move_and_slide()
 
-func destroy_self(time: float = 0):
-	if time == 0:
-		queue_free()
-		return
-	
-	await get_tree().create_timer(time).timeout
-	queue_free()
-
-func _process(delta: float) -> void:
 	if has_node("Sprite"):
 		var sprite = get_node("Sprite")
 		if last_move_dir.x < 0:
 			sprite.scale.x = lerp(sprite.scale.x,-1.0,10 * delta)
 		elif last_move_dir.x > 0:
 			sprite.scale.x = lerp(sprite.scale.x,1.0,10 * delta)
+
+func collide():
+	for entity in Globals.entities:
+		if entity != self and entity != null:
+
+			var has_collider: bool = false
+			for child in entity.get_children():
+				if child is CollisionShape2D:
+					has_collider = true
+
+			if entity.soft_collision:
+				has_collider = true
+
+			if has_collider and entity.global_position.distance_to(global_position) < 64:
+				add_force(global_position.direction_to(entity.global_position) * -90)
+
+func movement(delta):
+	velocity = velocity.lerp(_move_input.normalized() * speed, acceleration * delta)
+	velocity += force
+	force = Vector2.ZERO
+	_move_input = Vector2.ZERO
+
+func _physics_process(delta: float) -> void:
+	movement(delta)
+	collide()
+	animation(delta)
+
+	if is_static:
+		velocity = Vector2.ZERO
+	else:
+		move_and_slide()

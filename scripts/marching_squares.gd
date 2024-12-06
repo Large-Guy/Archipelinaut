@@ -2,6 +2,7 @@ extends StaticBody2D
 
 @export var tile_size: float = 64
 @export var size: int = 16
+@export var use_collision: bool = false
 
 var tiles: PackedInt32Array
 
@@ -140,7 +141,8 @@ func generate():
 	vertices.clear()
 	indices.clear()
 	generate_mesh(-1)
-	#generate_collision()
+	if use_collision:
+		generate_collision()
 
 func generate_mesh(i: int) -> ArrayMesh:
 	for y in range(1,size+1):
@@ -219,6 +221,7 @@ func generate_collision():
 		var col = CollisionPolygon2D.new()
 		col.build_mode = CollisionPolygon2D.BUILD_SEGMENTS
 		add_child(col)
+		col.position = Vector2(0,0)
 		collision_polygons.append(col)
 
 	var i: int = 0
@@ -363,4 +366,4 @@ func order_edges():
 		edge_points.append([])
 
 		for p in ordered_points:
-			edge_points.back().append(vertices[p])
+			edge_points.back().append(vertices[p] * tile_size)
