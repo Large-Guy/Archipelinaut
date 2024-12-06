@@ -1,10 +1,5 @@
 extends Node
 
-var tilesIDs = {}
-var tiles = []
-
-var world_seed: int = 0
-
 enum Team {
 	NEUTRAL = 0,
 	PLAYER = 1,
@@ -18,20 +13,18 @@ enum Team {
 	ANY,
 }
 
+var world_seed: int = 0
+
 var entities: Array[CharacterBody2D]
 
 var player: CharacterBody2D
-
-var current_chunk: Node2D
-
-var mouse_hover_chunk: Node2D
 
 var current_selected_slot: TextureRect
 
 func _ready():
 	world_seed = randi()
 
-	tilesIDs[null] = -1
+	Tile.tilesIDs[null] = -1
 	for file_name in DirAccess.get_files_at("res://world/tiles/"):
 		if (file_name.get_extension() == "tres"):
 			load("res://world/tiles/" + file_name)

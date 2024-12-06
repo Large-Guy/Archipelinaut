@@ -1,4 +1,7 @@
 extends Node2D
+class_name ChunkManager
+
+static var instance: ChunkManager
 
 @export var chunk_size: int = 32
 @export var chunk_scale: float = 64
@@ -8,7 +11,7 @@ var loaded_chunks = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	instance = self
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,3 +34,11 @@ func _process(_delta: float) -> void:
 		if(!chunks_around_player.has(chunk_l)):
 			loaded_chunks[chunk_l].queue_free()
 			loaded_chunks.erase(chunk_l)
+
+func global_to_chunk_position(pos: Vector2) -> Vector2i:
+	return Vector2i(floor(pos / (chunk_scale * chunk_size)))
+
+func get_chunk(chunk_position: Vector2i) -> Chunk:
+	if !loaded_chunks.has(chunk_position):
+		return null
+	return loaded_chunks[chunk_position]

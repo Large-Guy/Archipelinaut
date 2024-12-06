@@ -134,7 +134,7 @@ func generate():
 
 		meshs[i].mesh = generate_mesh(key)
 		meshs[i].z_index = -4096 + 20
-		meshs[i].modulate = Globals.tiles[key].color
+		meshs[i].modulate = Tile.tiles[key].color
 		i += 1
 
 	vertices.clear()

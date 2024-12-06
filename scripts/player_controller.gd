@@ -56,7 +56,7 @@ func interaction(delta):
 
 	var item_stack: ItemStack = Globals.player.inventory.stacks[Globals.player.inventory.current_selected]
 
-	var hover_chunk = Globals.mouse_hover_chunk
+	var hover_chunk = ChunkManager.instance.get_chunk(ChunkManager.instance.global_to_chunk_position(get_global_mouse_position()))
 	var current_hovering_tile = null
 	if hover_chunk != null:
 		current_hovering_tile = hover_chunk.walls.get_tile(hover_chunk.walls.world_to_tile(get_global_mouse_position()))
@@ -74,7 +74,7 @@ func interaction(delta):
 		current_hovering_tile == -1):
 		print("Building")
 		play_swing()
-		hover_chunk.walls.set_tile(hover_chunk.walls.world_to_tile(get_global_mouse_position()), Globals.tilesIDs[item_stack.item.tile])
+		hover_chunk.walls.set_tile(hover_chunk.walls.world_to_tile(get_global_mouse_position()), Tile.tilesIDs[item_stack.item.tile])
 		hover_chunk.walls.generate()
 
 func hand(_delta):

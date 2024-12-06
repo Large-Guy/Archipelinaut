@@ -1,4 +1,5 @@
 extends Node2D
+class_name Chunk
 
 @export var size: int = 16
 @export var tile_size: float = 64
@@ -16,9 +17,3 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	var rect = Rect2(global_position,Vector2(size,size) * tile_size)
-
-	if rect.has_point(Globals.player.global_position):
-		Globals.current_chunk = self
-
-	if rect.has_point(get_global_mouse_position()):
-		Globals.mouse_hover_chunk = self

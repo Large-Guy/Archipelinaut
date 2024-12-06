@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/marching_squares.gd" id="1_a4fo5"]
 
-[node name="Chunk" type="StaticBody2D"]
+[node name="Chunk2" type="StaticBody2D"]
 scale = Vector2(128, 128)
 script = ExtResource("1_a4fo5")
 size = 32
